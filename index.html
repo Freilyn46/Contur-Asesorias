@@ -143,6 +143,42 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
 .modal-logo span { color: #c9a84c; }
 .modal-sub { text-align: center; font-family: Arial, sans-serif; font-size: 13px; color: #6b7280; margin-bottom: 24px; }
 .modal-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 10px 14px; font-family: Arial, sans-serif; font-size: 12px; color: #1a5276; text-align: center; margin-bottom: 20px; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  nav::after { content: 'CONTUR'; font-size: 20px; font-weight: bold; color: #c9a84c; letter-spacing: 3px; position: absolute; left: 50%; transform: translateX(-50%); }
+
+  #inicio { padding: 90px 20px 40px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 30px; }
+  .hero-title { font-size: 32px; }
+  .hero-desc { font-size: 15px; }
+  .btn-gold, .btn-outline { padding: 11px 20px; font-size: 14px; display: block; text-align: center; margin-bottom: 12px; margin-right: 0; }
+  .stats-box { margin-top: 10px; }
+  .stat-num { font-size: 32px; }
+
+  section { padding: 50px 20px; }
+  .section-title { font-size: 28px; }
+  .two-col { grid-template-columns: 1fr; gap: 30px; }
+  .big-num { font-size: 70px; }
+
+  .grid-3 { grid-template-columns: 1fr; gap: 16px; }
+  .card { padding: 22px; }
+
+  #innovacion .grid-2 { grid-template-columns: 1fr; gap: 16px; }
+
+  .grid-3-planes { grid-template-columns: 1fr; gap: 16px; }
+  .plan.featured { transform: none; }
+
+  .two-col .mockup { margin-bottom: 20px; }
+
+  .form-box { padding: 24px; }
+  .form-row2 { grid-template-columns: 1fr; gap: 0; }
+
+  footer { padding: 30px 20px; }
+  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+}
 </style>
 </head>
 <body>
@@ -370,7 +406,7 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
         <h2 class="section-title">Estamos en Santo Domingo</h2>
         <p class="section-desc">Primera consulta sin costo. Evaluamos tu situacion contable y te decimos exactamente que necesitas.</p>
         <div class="ci-list">
-          <div class="ci"><div class="ci-icon">&#128205;</div><div><div class="ci-label">DIRECCION</div><div class="ci-val">Haras Nacionales, Santo Domingo, R.D.</div></div></div>
+          <div class="ci"><div class="ci-icon">&#128205;</div><div><div class="ci-label">DIRECCION</div><div class="ci-val"Haras Nacionales, Santo Domingo, R.D.</div></div></div>
           <div class="ci"><div class="ci-icon">&#128222;</div><div><div class="ci-label">TELEFONO</div><div class="ci-val">809-000-0000</div></div></div>
           <div class="ci"><div class="ci-icon">&#9993;</div><div><div class="ci-label">CORREO</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0c9cec6cfe0c3cfced4d5d28ec3cfcd8ec4cf">[email&#160;protected]</a></div></div></div>
           <div class="ci"><div class="ci-icon">&#128336;</div><div><div class="ci-label">HORARIO</div><div class="ci-val">Lunes a viernes: 8:00 AM - 6:00 PM</div></div></div>
