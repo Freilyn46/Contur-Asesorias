@@ -3,568 +3,1061 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contur - Portal de Clientes</title>
+<title>Contur — Portal de Clientes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+:root {
+  --navy: #0d1b2a;
+  --navy-mid: #1a2e44;
+  --navy-light: rgba(13,27,42,0.06);
+  --gold: #c9a84c;
+  --gold-light: #f0c84e;
+  --gold-faint: rgba(201,168,76,0.12);
+  --white: #ffffff;
+  --surface: #f4f5f7;
+  --border: #e8eaed;
+  --border-light: #f0f1f3;
+  --text-primary: #0d1b2a;
+  --text-secondary: #5a6478;
+  --text-muted: #9aa0ae;
+  --green: #16a34a;
+  --red: #dc2626;
+  --blue: #1a5276;
+  --sidebar-w: 252px;
+  --topbar-h: 62px;
+  --radius: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.14);
+}
 
-/* LOGIN */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+/* ═══════════════════════════════════════
+   LOGIN
+═══════════════════════════════════════ */
 #login-screen {
-  min-height: 100vh; background: #0d1b2a;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 #login-screen::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 60% 50%, rgba(26,82,118,0.4) 0%, transparent 70%);
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 65% 45%, rgba(201,168,76,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(26,82,118,0.3) 0%, transparent 60%);
 }
+/* decorative lines */
+#login-screen::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border: 1px solid rgba(201,168,76,0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
 .login-box {
-  background: #fff; border-radius: 16px; padding: 48px 44px;
-  width: 420px; max-width: 95vw; position: relative; z-index: 2;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+  background: var(--white);
+  border-radius: 20px;
+  padding: 48px 44px;
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.05);
+  animation: loginReveal 0.5s ease both;
 }
-.login-logo { text-align: center; font-family: Georgia, serif; font-size: 32px; font-weight: bold; color: #0d1b2a; letter-spacing: 3px; margin-bottom: 6px; }
-.login-logo span { color: #c9a84c; }
-.login-sub { text-align: center; font-size: 13px; color: #6b7280; margin-bottom: 32px; }
-.login-divider { height: 1px; background: #e5e7eb; margin: 24px 0; }
-.form-label { display: block; font-size: 12px; font-weight: bold; color: #0d1b2a; margin-bottom: 6px; letter-spacing: 0.3px; }
-.form-input { width: 100%; padding: 11px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; color: #1a1a2e; outline: none; margin-bottom: 16px; font-family: Arial, sans-serif; }
-.form-input:focus { border-color: #1a5276; box-shadow: 0 0 0 3px rgba(26,82,118,0.1); }
-.btn-login { width: 100%; padding: 13px; background: #c9a84c; color: #0d1b2a; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; font-family: Arial, sans-serif; }
-.btn-login:hover { background: #f0c84e; }
-.login-hint { text-align: center; font-size: 12px; color: #9ca3af; margin-top: 16px; }
-.demo-badge { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #0369a1; margin-bottom: 20px; text-align: center; }
 
-/* PORTAL LAYOUT */
-#portal-screen { display: none; min-height: 100vh; flex-direction: column; }
-#portal-screen.active { display: flex; }
+@keyframes loginReveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-/* SIDEBAR */
-.layout { display: flex; flex: 1; }
+.login-logo {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 4px;
+  margin-bottom: 4px;
+}
+.login-logo span { color: var(--gold); }
+.login-sub { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-bottom: 32px; letter-spacing: 0.3px; }
+
+.login-divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+.form-label { display: block; font-size: 11.5px; font-weight: 600; color: var(--navy); margin-bottom: 7px; letter-spacing: 0.4px; }
+.form-input {
+  width: 100%; padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px; color: var(--text-primary);
+  outline: none; margin-bottom: 16px;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+}
+.form-input:focus {
+  border-color: var(--blue);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(26,82,118,0.09);
+}
+
+.btn-login {
+  width: 100%; padding: 14px;
+  background: var(--navy);
+  color: var(--gold);
+  border: none; border-radius: 8px;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.8px;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-login:hover { background: #1a2e44; }
+.btn-login:active { transform: scale(0.99); }
+
+.login-hint { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 16px; }
+.demo-badge {
+  background: #f0f9ff; border: 1px solid #bae6fd;
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 12px; color: #0369a1;
+  margin-bottom: 20px; text-align: center;
+}
+
+/* ═══════════════════════════════════════
+   PORTAL
+═══════════════════════════════════════ */
+#portal-screen { display: none; min-height: 100vh; }
+#portal-screen.active { display: block; }
+
+/* ─── MOBILE OVERLAY ─── */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+  backdrop-filter: blur(2px);
+}
+
+/* ─── SIDEBAR ─── */
 .sidebar {
-  width: 240px; background: #0d1b2a; flex-shrink: 0;
+  width: var(--sidebar-w);
+  background: var(--navy);
   display: flex; flex-direction: column;
-  min-height: 100vh; position: fixed; top: 0; left: 0; bottom: 0;
-  border-right: 1px solid rgba(201,168,76,0.2);
+  min-height: 100vh;
+  position: fixed; top: 0; left: 0; bottom: 0;
+  border-right: 1px solid rgba(201,168,76,0.1);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  z-index: 100;
 }
-.sidebar-logo { padding: 24px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.sidebar-logo-text { font-family: Georgia, serif; font-size: 22px; font-weight: bold; color: #fff; letter-spacing: 2px; }
-.sidebar-logo-text span { color: #c9a84c; }
-.sidebar-client { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
-.sidebar-nav { flex: 1; padding: 16px 12px; }
-.nav-section-title { font-size: 10px; font-weight: bold; color: rgba(255,255,255,0.25); letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 12px 4px; margin-top: 8px; }
+
+.sidebar-logo { padding: 24px 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.sidebar-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 700;
+  color: var(--white); letter-spacing: 3px;
+}
+.sidebar-logo-text span { color: var(--gold); }
+.sidebar-client { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 5px; font-weight: 300; }
+
+.sidebar-nav { flex: 1; padding: 18px 12px; overflow-y: auto; }
+.nav-section-title {
+  font-size: 9.5px; font-weight: 600;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 1.8px; text-transform: uppercase;
+  padding: 10px 12px 5px; margin-top: 10px;
+}
 .nav-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 12px; border-radius: 8px; cursor: pointer;
-  font-size: 13px; color: rgba(255,255,255,0.6);
-  margin-bottom: 2px; transition: all 0.2s; position: relative;
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 12px; border-radius: 9px;
+  cursor: pointer; font-size: 13.5px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 2px;
+  transition: all 0.18s;
+  position: relative;
+  font-weight: 400;
 }
-.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
-.nav-item.active { background: rgba(201,168,76,0.15); color: #c9a84c; }
-.nav-item.active::left { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; background: #c9a84c; border-radius: 0 2px 2px 0; }
-.nav-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
-.nav-badge { background: #c9a84c; color: #0d1b2a; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 10px; margin-left: auto; }
-.sidebar-footer { padding: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+.nav-item:hover {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+}
+.nav-item.active {
+  background: rgba(201,168,76,0.13);
+  color: var(--gold);
+  font-weight: 500;
+}
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px; bottom: 6px;
+  width: 3px;
+  background: var(--gold);
+  border-radius: 0 3px 3px 0;
+}
+.nav-icon { font-size: 16px; width: 22px; text-align: center; flex-shrink: 0; opacity: 0.85; }
+.nav-badge {
+  background: var(--gold); color: var(--navy);
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 10px;
+  margin-left: auto;
+}
+
+.sidebar-footer { padding: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
 .sidebar-user { display: flex; align-items: center; gap: 10px; }
-.user-avatar { width: 34px; height: 34px; background: #c9a84c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #0d1b2a; flex-shrink: 0; }
-.user-name { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500; }
-.user-role { font-size: 10px; color: rgba(255,255,255,0.35); }
-.btn-logout { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.3); cursor: pointer; font-size: 16px; }
-.btn-logout:hover { color: #c9a84c; }
+.user-avatar {
+  width: 36px; height: 36px;
+  background: var(--gold); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--navy);
+  flex-shrink: 0;
+}
+.user-name { font-size: 12.5px; color: rgba(255,255,255,0.85); font-weight: 500; }
+.user-role { font-size: 10.5px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+.btn-logout {
+  margin-left: auto; background: none; border: none;
+  color: rgba(255,255,255,0.25); cursor: pointer; font-size: 17px;
+  transition: color 0.2s; padding: 4px;
+}
+.btn-logout:hover { color: var(--gold); }
 
-/* MAIN CONTENT */
-.main { flex: 1; margin-left: 240px; display: flex; flex-direction: column; min-height: 100vh; }
-.topbar { background: #fff; padding: 0 32px; height: 60px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 10; }
-.page-title { font-family: Georgia, serif; font-size: 20px; color: #0d1b2a; font-weight: bold; }
-.topbar-right { display: flex; align-items: center; gap: 16px; }
-.notif-btn { background: #f3f4f6; border: none; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 16px; position: relative; }
-.notif-dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; border: 2px solid #f3f4f6; }
-.date-badge { font-size: 12px; color: #6b7280; }
+/* ─── MAIN ─── */
+.main { margin-left: var(--sidebar-w); display: flex; flex-direction: column; min-height: 100vh; }
 
-.content { padding: 28px 32px; flex: 1; }
-.page { display: none; }
+/* ─── TOPBAR ─── */
+.topbar {
+  background: var(--white);
+  padding: 0 28px;
+  height: var(--topbar-h);
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+.topbar-left { display: flex; align-items: center; gap: 14px; }
+.menu-btn {
+  display: none;
+  background: none; border: none;
+  font-size: 20px; cursor: pointer;
+  color: var(--text-secondary); padding: 4px;
+  border-radius: 6px;
+}
+.menu-btn:hover { background: var(--surface); }
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; color: var(--navy); font-weight: 600;
+}
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.notif-btn {
+  background: var(--surface); border: none;
+  width: 38px; height: 38px; border-radius: 9px;
+  cursor: pointer; font-size: 16px;
+  position: relative; transition: background 0.2s;
+}
+.notif-btn:hover { background: var(--border); }
+.notif-dot {
+  position: absolute; top: 7px; right: 7px;
+  width: 7px; height: 7px;
+  background: #ef4444; border-radius: 50%;
+  border: 2px solid var(--surface);
+}
+.date-badge {
+  font-size: 12px; color: var(--text-muted);
+  font-weight: 300; letter-spacing: 0.2px;
+}
+
+/* ─── CONTENT ─── */
+.content { padding: 26px 28px; flex: 1; }
+.page { display: none; animation: fadeUp 0.3s ease both; }
 .page.active { display: block; }
 
-/* DASHBOARD */
-.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-.kpi { background: #fff; border-radius: 12px; padding: 22px; border: 1px solid #e5e7eb; position: relative; overflow: hidden; }
-.kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.kpi.gold::before { background: #c9a84c; }
-.kpi.blue::before { background: #1a5276; }
-.kpi.green::before { background: #16a34a; }
-.kpi.red::before { background: #dc2626; }
-.kpi-label { font-size: 11px; color: #6b7280; font-weight: bold; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
-.kpi-value { font-family: Georgia, serif; font-size: 28px; font-weight: bold; color: #0d1b2a; margin-bottom: 4px; }
-.kpi-sub { font-size: 11px; color: #6b7280; }
-.kpi-change { font-size: 11px; font-weight: bold; margin-top: 6px; }
-.kpi-change.up { color: #16a34a; }
-.kpi-change.down { color: #dc2626; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-.dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 24px; }
-.card-box { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
-.card-header { padding: 18px 22px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; }
-.card-title-sm { font-family: Georgia, serif; font-size: 16px; color: #0d1b2a; font-weight: bold; }
+/* ─── BUTTONS ─── */
+.btn-primary {
+  background: var(--navy); color: var(--gold);
+  border: none; padding: 9px 18px;
+  border-radius: 8px; font-size: 13px;
+  font-weight: 600; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: var(--navy-mid); }
+.btn-primary:active { transform: scale(0.98); }
+
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; gap: 12px; }
+.section-header h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); }
+
+/* ═══════════════════════════════════════
+   KPI CARDS
+═══════════════════════════════════════ */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+
+.kpi {
+  background: var(--white); border-radius: var(--radius);
+  padding: 20px 22px; border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.kpi:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+.kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.kpi.gold::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+.kpi.blue::before { background: linear-gradient(90deg, #1a5276, #2e86c1); }
+.kpi.green::before { background: linear-gradient(90deg, #16a34a, #4ade80); }
+.kpi.red::before  { background: linear-gradient(90deg, #dc2626, #f87171); }
+
+.kpi-label { font-size: 10.5px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.7px; text-transform: uppercase; margin-bottom: 10px; }
+.kpi-value { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.kpi-sub { font-size: 11px; color: var(--text-muted); }
+.kpi-change { font-size: 11.5px; font-weight: 600; margin-top: 8px; display: flex; align-items: center; gap: 3px; }
+.kpi-change.up { color: var(--green); }
+.kpi-change.down { color: var(--red); }
+
+/* ═══════════════════════════════════════
+   DASHBOARD GRID
+═══════════════════════════════════════ */
+.dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px; }
+.card-box { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.card-header { padding: 18px 22px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
+.card-title-sm { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--navy); font-weight: 600; }
 .card-body { padding: 20px 22px; }
 
-/* Fake chart */
-.chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 140px; }
-.bar-group { flex: 1; display: flex; gap: 3px; align-items: flex-end; }
-.bar { border-radius: 4px 4px 0 0; transition: opacity 0.2s; cursor: default; }
-.bar:hover { opacity: 0.8; }
-.bar.income { background: #1a5276; }
-.bar.expense { background: #c9a84c; }
-.chart-labels { display: flex; gap: 8px; margin-top: 8px; }
-.chart-label { flex: 1; text-align: center; font-size: 10px; color: #9ca3af; }
-.chart-legend { display: flex; gap: 16px; margin-top: 12px; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6b7280; }
-.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+/* ─── Chart ─── */
+.chart-bars { display: flex; align-items: flex-end; gap: 10px; height: 140px; }
+.bar-group { flex: 1; display: flex; gap: 4px; align-items: flex-end; }
+.bar { border-radius: 4px 4px 0 0; transition: opacity 0.2s, transform 0.2s; cursor: default; }
+.bar:hover { opacity: 0.75; transform: scaleY(1.02); transform-origin: bottom; }
+.bar.income { background: linear-gradient(180deg, #2e86c1, var(--blue)); }
+.bar.expense { background: linear-gradient(180deg, var(--gold-light), var(--gold)); }
+.chart-labels { display: flex; gap: 10px; margin-top: 9px; }
+.chart-label { flex: 1; text-align: center; font-size: 10px; color: var(--text-muted); }
+.chart-legend { display: flex; gap: 18px; margin-top: 14px; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; }
 
+/* ─── Alerts ─── */
 .alert-list { display: flex; flex-direction: column; gap: 10px; }
-.alert-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border-radius: 8px; }
-.alert-item.danger { background: #fef2f2; border: 1px solid #fecaca; }
+.alert-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 9px; }
+.alert-item.danger  { background: #fef2f2; border: 1px solid #fecaca; }
 .alert-item.warning { background: #fffbeb; border: 1px solid #fde68a; }
-.alert-item.info { background: #eff6ff; border: 1px solid #bfdbfe; }
-.alert-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-.alert-item.danger .alert-dot { background: #dc2626; }
+.alert-item.info    { background: #eff6ff; border: 1px solid #bfdbfe; }
+.alert-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.alert-item.danger  .alert-dot { background: #dc2626; }
 .alert-item.warning .alert-dot { background: #d97706; }
-.alert-item.info .alert-dot { background: #2563eb; }
-.alert-title { font-size: 13px; font-weight: bold; color: #0d1b2a; margin-bottom: 2px; }
-.alert-desc { font-size: 11px; color: #6b7280; }
+.alert-item.info    .alert-dot { background: #2563eb; }
+.alert-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.alert-desc  { font-size: 11.5px; color: var(--text-secondary); line-height: 1.4; }
 
+/* ─── Table ─── */
 .recent-table { width: 100%; border-collapse: collapse; }
-.recent-table th { font-size: 11px; color: #6b7280; font-weight: bold; letter-spacing: 0.5px; text-transform: uppercase; padding: 8px 0; border-bottom: 1px solid #f3f4f6; text-align: left; }
-.recent-table td { padding: 12px 0; border-bottom: 1px solid #f9fafb; font-size: 13px; color: #374151; vertical-align: middle; }
+.recent-table th {
+  font-size: 10.5px; color: var(--text-muted);
+  font-weight: 600; letter-spacing: 0.6px;
+  text-transform: uppercase; padding: 8px 0;
+  border-bottom: 1px solid var(--border-light); text-align: left;
+}
+.recent-table td {
+  padding: 12px 0; border-bottom: 1px solid var(--border-light);
+  font-size: 13px; color: #374151; vertical-align: middle;
+}
 .recent-table tr:last-child td { border-bottom: none; }
-.status-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
-.status-badge.enviada { background: #dcfce7; color: #16a34a; }
-.status-badge.pendiente { background: #fef9c3; color: #ca8a04; }
-.status-badge.proceso { background: #dbeafe; color: #2563eb; }
-.status-badge.vencida { background: #fee2e2; color: #dc2626; }
+.recent-table tbody tr { transition: background 0.15s; }
+.recent-table tbody tr:hover td { background: var(--surface); }
 
-/* DOCUMENTOS */
-.doc-filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-.filter-btn { padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1px solid #d1d5db; background: #fff; color: #6b7280; font-family: Arial, sans-serif; }
-.filter-btn.active { background: #0d1b2a; color: #c9a84c; border-color: #0d1b2a; }
-.doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.doc-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px; transition: box-shadow 0.2s; }
-.doc-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-.doc-icon { font-size: 28px; }
-.doc-name { font-size: 14px; font-weight: bold; color: #0d1b2a; }
-.doc-meta { font-size: 11px; color: #9ca3af; }
+.status-badge {
+  display: inline-block; padding: 3px 11px;
+  border-radius: 20px; font-size: 11px; font-weight: 600;
+}
+.status-badge.enviada   { background: #dcfce7; color: #15803d; }
+.status-badge.pendiente { background: #fef9c3; color: #b45309; }
+.status-badge.proceso   { background: #dbeafe; color: #1d4ed8; }
+.status-badge.vencida   { background: #fee2e2; color: #b91c1c; }
+
+/* ═══════════════════════════════════════
+   DOCUMENTOS
+═══════════════════════════════════════ */
+.doc-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-btn {
+  padding: 7px 16px; border-radius: 20px; font-size: 13px;
+  cursor: pointer; border: 1.5px solid var(--border);
+  background: var(--white); color: var(--text-secondary);
+  font-family: 'DM Sans', sans-serif; font-weight: 400;
+  transition: all 0.18s;
+}
+.filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+.filter-btn.active { background: var(--navy); color: var(--gold); border-color: var(--navy); font-weight: 500; }
+
+.doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.doc-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.doc-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.doc-icon { font-size: 26px; }
+.doc-name { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.3; }
+.doc-meta { font-size: 11px; color: var(--text-muted); }
 .doc-actions { display: flex; gap: 8px; margin-top: 4px; }
-.btn-sm { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; border: none; font-family: Arial, sans-serif; }
-.btn-sm.primary { background: #0d1b2a; color: #c9a84c; }
-.btn-sm.secondary { background: #f3f4f6; color: #374151; }
-.btn-sm:hover { opacity: 0.85; }
+.btn-sm {
+  padding: 7px 13px; border-radius: 7px; font-size: 12px;
+  font-weight: 600; cursor: pointer; border: none;
+  font-family: 'DM Sans', sans-serif; transition: all 0.18s;
+}
+.btn-sm.primary   { background: var(--navy); color: var(--gold); }
+.btn-sm.secondary { background: var(--surface); color: var(--text-secondary); }
+.btn-sm:hover { opacity: 0.82; transform: translateY(-1px); }
 
-/* DECLARACIONES */
-.decl-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; }
-.decl-table th { background: #0d1b2a; color: #c9a84c; font-size: 12px; font-weight: bold; letter-spacing: 0.5px; padding: 14px 18px; text-align: left; }
-.decl-table td { padding: 14px 18px; border-bottom: 1px solid #f3f4f6; font-size: 13px; color: #374151; }
+/* ═══════════════════════════════════════
+   DECLARACIONES
+═══════════════════════════════════════ */
+.decl-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.decl-table th { background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 0.6px; padding: 14px 18px; text-align: left; }
+.decl-table td { padding: 14px 18px; border-bottom: 1px solid var(--border-light); font-size: 13px; color: #374151; }
 .decl-table tr:last-child td { border-bottom: none; }
-.decl-table tr:hover td { background: #f9fafb; }
+.decl-table tr:hover td { background: var(--surface); }
 
-/* CHAT */
-.chat-layout { display: grid; grid-template-columns: 260px 1fr; gap: 0; background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; height: 520px; }
-.chat-sidebar { border-right: 1px solid #f3f4f6; display: flex; flex-direction: column; }
-.chat-sidebar-header { padding: 16px; border-bottom: 1px solid #f3f4f6; font-weight: bold; font-size: 14px; color: #0d1b2a; }
-.chat-contact { display: flex; gap: 10px; align-items: center; padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #f9fafb; }
-.chat-contact:hover { background: #f9fafb; }
+/* scroll wrapper para tabla en móvil */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
+
+/* ═══════════════════════════════════════
+   CHAT
+═══════════════════════════════════════ */
+.chat-layout {
+  display: grid; grid-template-columns: 250px 1fr;
+  background: var(--white); border-radius: var(--radius);
+  border: 1px solid var(--border); overflow: hidden; height: 540px;
+}
+.chat-sidebar { border-right: 1px solid var(--border-light); display: flex; flex-direction: column; }
+.chat-sidebar-header { padding: 16px 18px; border-bottom: 1px solid var(--border-light); font-weight: 600; font-size: 14px; color: var(--navy); }
+.chat-contact { display: flex; gap: 10px; align-items: center; padding: 12px 16px; cursor: pointer; transition: background 0.15s; }
+.chat-contact:hover { background: var(--surface); }
 .chat-contact.active { background: #f0f7ff; }
-.contact-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; color: #fff; flex-shrink: 0; }
-.contact-name { font-size: 13px; font-weight: bold; color: #0d1b2a; }
-.contact-role { font-size: 11px; color: #6b7280; }
-.online-dot { width: 8px; height: 8px; background: #16a34a; border-radius: 50%; margin-left: auto; }
-.chat-main { display: flex; flex-direction: column; }
-.chat-header { padding: 14px 20px; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 12px; }
-.chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #f9fafb; }
+.contact-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+.contact-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+.contact-role { font-size: 11px; color: var(--text-muted); }
+.online-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; margin-left: auto; flex-shrink: 0; }
+.chat-main { display: flex; flex-direction: column; min-height: 0; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; }
+.chat-messages {
+  flex: 1; padding: 20px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 14px;
+  background: var(--surface);
+}
 .msg { max-width: 72%; }
 .msg.sent { align-self: flex-end; }
 .msg.recv { align-self: flex-start; }
-.msg-bubble { padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
-.msg.sent .msg-bubble { background: #0d1b2a; color: #fff; border-bottom-right-radius: 4px; }
-.msg.recv .msg-bubble { background: #fff; color: #1a1a2e; border: 1px solid #e5e7eb; border-bottom-left-radius: 4px; }
-.msg-time { font-size: 10px; color: #9ca3af; margin-top: 4px; }
+.msg-bubble { padding: 11px 15px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; }
+.msg.sent .msg-bubble { background: var(--navy); color: var(--white); border-bottom-right-radius: 4px; }
+.msg.recv .msg-bubble { background: var(--white); color: var(--text-primary); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.msg-time { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
 .msg.sent .msg-time { text-align: right; }
-.chat-input-area { padding: 14px 20px; border-top: 1px solid #f3f4f6; display: flex; gap: 10px; align-items: center; }
-.chat-input { flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 13px; outline: none; font-family: Arial, sans-serif; }
-.chat-input:focus { border-color: #1a5276; }
-.btn-send { background: #c9a84c; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+.chat-input-area { padding: 14px 18px; border-top: 1px solid var(--border-light); display: flex; gap: 10px; align-items: center; }
+.chat-input {
+  flex: 1; padding: 10px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 22px; font-size: 13.5px; outline: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s;
+}
+.chat-input:focus { border-color: var(--blue); }
+.btn-send {
+  background: var(--gold); border: none;
+  width: 38px; height: 38px; border-radius: 50%;
+  cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.1s;
+  color: var(--navy);
+}
+.btn-send:hover { background: var(--gold-light); }
+.btn-send:active { transform: scale(0.93); }
 
-/* PERFIL */
-.perfil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.perfil-card { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; padding: 24px; }
-.perfil-card-title { font-family: Georgia, serif; font-size: 16px; color: #0d1b2a; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #f3f4f6; }
+/* ═══════════════════════════════════════
+   PERFIL
+═══════════════════════════════════════ */
+.perfil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.perfil-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; }
+.perfil-card-title { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--navy); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border-light); }
 .perfil-field { margin-bottom: 16px; }
-.perfil-label { font-size: 11px; color: #9ca3af; font-weight: bold; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
-.perfil-value { font-size: 14px; color: #0d1b2a; }
-.perfil-input { width: 100%; padding: 9px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; font-family: Arial, sans-serif; outline: none; color: #1a1a2e; }
-.perfil-input:focus { border-color: #1a5276; }
-.plan-info { background: #0d1b2a; border-radius: 12px; padding: 24px; color: #fff; }
-.plan-info-name { font-family: Georgia, serif; font-size: 24px; color: #c9a84c; margin-bottom: 8px; }
-.plan-info-desc { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
-.plan-feature { font-size: 13px; color: rgba(255,255,255,0.8); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; gap: 8px; }
-.plan-feature::before { content: "✓"; color: #c9a84c; font-weight: bold; }
-.plan-feature:last-child { border-bottom: none; }
-.cpa-card { display: flex; gap: 16px; align-items: center; background: #f9fafb; border-radius: 10px; padding: 16px; margin-top: 16px; }
-.cpa-avatar { width: 48px; height: 48px; border-radius: 50%; background: #1a5276; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #fff; flex-shrink: 0; }
-.cpa-name { font-size: 14px; font-weight: bold; color: #0d1b2a; }
-.cpa-role { font-size: 12px; color: #6b7280; }
-.cpa-contact { font-size: 12px; color: #1a5276; margin-top: 2px; }
+.perfil-label { font-size: 10.5px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 5px; }
+.perfil-input {
+  width: 100%; padding: 10px 13px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 13.5px; font-family: 'DM Sans', sans-serif;
+  outline: none; color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+}
+.perfil-input:focus { border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(26,82,118,0.08); }
 
-/* SECTION HEADER */
-.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.section-header h2 { font-family: Georgia, serif; font-size: 22px; color: #0d1b2a; }
-.btn-primary { background: #c9a84c; color: #0d1b2a; border: none; padding: 9px 20px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; font-family: Arial, sans-serif; }
-.btn-primary:hover { background: #f0c84e; }
+.plan-info { background: var(--navy); border-radius: var(--radius); padding: 24px; color: var(--white); }
+.plan-info-name { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); margin-bottom: 6px; }
+.plan-info-desc { font-size: 12.5px; color: rgba(255,255,255,0.5); margin-bottom: 20px; font-weight: 300; }
+.plan-feature {
+  font-size: 13px; color: rgba(255,255,255,0.78);
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; gap: 9px; align-items: center;
+}
+.plan-feature::before { content: "✓"; color: var(--gold); font-weight: 700; font-size: 12px; }
+.plan-feature:last-of-type { border-bottom: none; margin-bottom: 20px; }
+
+.cpa-card { display: flex; gap: 14px; align-items: center; background: var(--surface); border-radius: 10px; padding: 16px; margin-top: 16px; }
+.cpa-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+.cpa-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+.cpa-role { font-size: 11.5px; color: var(--text-muted); }
+.cpa-contact { font-size: 12px; color: var(--blue); margin-top: 3px; }
+
+/* ═══════════════════════════════════════
+   MOBILE RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-grid { grid-template-columns: 1fr; }
+  .doc-grid  { grid-template-columns: repeat(2, 1fr); }
+  .perfil-grid { grid-template-columns: 1fr; }
+  .chat-layout { grid-template-columns: 1fr; height: auto; }
+  .chat-sidebar { display: none; }
+  .chat-main { height: 500px; }
+}
+
+@media (max-width: 768px) {
+  :root { --sidebar-w: 0px; }
+
+  .sidebar {
+    transform: translateX(-252px);
+    width: 252px;
+    z-index: 101;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.open { display: block; }
+
+  .main { margin-left: 0; }
+  .menu-btn { display: flex; align-items: center; justify-content: center; }
+
+  .topbar { padding: 0 16px; }
+  .date-badge { display: none; }
+  .content { padding: 18px 16px; }
+
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .kpi { padding: 16px 16px; }
+  .kpi-value { font-size: 22px; }
+
+  .doc-grid { grid-template-columns: 1fr; }
+  .doc-grid .doc-card:last-child { display: none; }
+
+  .decl-table th, .decl-table td { padding: 10px 12px; font-size: 12px; }
+
+  .section-header { flex-wrap: wrap; }
+  .section-header h2 { font-size: 19px; }
+}
+
+@media (max-width: 480px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi-value { font-size: 20px; }
+  .kpi { padding: 14px; }
+
+  .login-box { padding: 36px 24px; }
+  .login-logo { font-size: 28px; }
+
+  .recent-table th:nth-child(3),
+  .recent-table td:nth-child(3) { display: none; }
+}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║          LOGIN               ║ -->
+<!-- ╚══════════════════════════════╝ -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="login-logo">CON<span>TUR</span></div>
-    <p class="login-sub">Portal de Clientes — Acceso seguro</p>
-    <div class="demo-badge">&#128274; Demo: usa cualquier correo y contrasena</div>
-    <label class="form-label">Correo electronico</label>
-    <input type="email" class="form-input" id="login-email" placeholder="empresa@correo.com" value="hotel@caribe.com">
-    <label class="form-label">Contrasena</label>
-    <input type="password" class="form-input" id="login-pass" placeholder="********" value="12345678">
-    <button class="btn-login" onclick="doLogin()">Iniciar sesion</button>
-    <p class="login-hint">Primera vez? Contacta a tu CPA asignado para activar tu cuenta.</p>
+    <div class="login-logo">CONT<span>U</span>R</div>
+    <div class="login-sub">Portal de Clientes — Acceso seguro</div>
+    <div class="demo-badge">✦ Demo: cualquier usuario y contraseña</div>
+    <label class="form-label">Correo electrónico</label>
+    <input class="form-input" type="email" placeholder="tu@empresa.com" value="hotel@caribe.com">
+    <label class="form-label">Contraseña</label>
+    <input class="form-input" type="password" placeholder="••••••••" value="demo123">
+    <button class="btn-login" onclick="doLogin()">Ingresar al portal</button>
+    <div class="login-hint">¿Problemas para acceder? Contacta a tu CPA</div>
   </div>
 </div>
 
-<!-- PORTAL -->
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║         PORTAL               ║ -->
+<!-- ╚══════════════════════════════╝ -->
 <div id="portal-screen">
-  <div class="layout">
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-      <div class="sidebar-logo">
-        <div class="sidebar-logo-text">CON<span>TUR</span></div>
-        <div class="sidebar-client">Hotel Caribe S.R.L.</div>
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">CONT<span>U</span>R</div>
+      <div class="sidebar-client">Hotel Caribe S.R.L.</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Principal</div>
+      <div class="nav-item active" onclick="showPage('dashboard',this)">
+        <span class="nav-icon">⬡</span> Dashboard
       </div>
-      <div class="sidebar-nav">
-        <div class="nav-section-title">Principal</div>
-        <div class="nav-item active" onclick="showPage('dashboard', this)"><span class="nav-icon">&#128202;</span> Dashboard</div>
-        <div class="nav-item" onclick="showPage('documentos', this)"><span class="nav-icon">&#128193;</span> Documentos <span class="nav-badge">5</span></div>
-        <div class="nav-item" onclick="showPage('declaraciones', this)"><span class="nav-icon">&#127963;</span> Declaraciones</div>
-
-        <div class="nav-section-title">Comunicacion</div>
-        <div class="nav-item" onclick="showPage('chat', this)"><span class="nav-icon">&#128172;</span> Chat con CPA <span class="nav-badge">2</span></div>
-
-        <div class="nav-section-title">Mi Cuenta</div>
-        <div class="nav-item" onclick="showPage('perfil', this)"><span class="nav-icon">&#127968;</span> Perfil de Empresa</div>
+      <div class="nav-item" onclick="showPage('documentos',this)">
+        <span class="nav-icon">📂</span> Documentos
+        <span class="nav-badge">5</span>
       </div>
-      <div class="sidebar-footer">
-        <div class="sidebar-user">
-          <div class="user-avatar">HC</div>
-          <div>
-            <div class="user-name">Hotel Caribe</div>
-            <div class="user-role">Plan Estandar</div>
-          </div>
-          <button class="btn-logout" onclick="doLogout()" title="Cerrar sesion">&#8592;</button>
+      <div class="nav-item" onclick="showPage('declaraciones',this)">
+        <span class="nav-icon">📋</span> Declaraciones
+        <span class="nav-badge">2</span>
+      </div>
+
+      <div class="nav-section-title">Comunicación</div>
+      <div class="nav-item" onclick="showPage('chat',this)">
+        <span class="nav-icon">💬</span> Chat con CPA
+      </div>
+
+      <div class="nav-section-title">Cuenta</div>
+      <div class="nav-item" onclick="showPage('perfil',this)">
+        <span class="nav-icon">🏢</span> Perfil de empresa
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">CM</div>
+        <div>
+          <div class="user-name">Carlos Mejía</div>
+          <div class="user-role">Gerente General</div>
         </div>
+        <button class="btn-logout" onclick="doLogout()" title="Cerrar sesión">⏻</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <div class="page-title" id="topbar-title">Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-badge" id="date-display"></div>
+        <button class="notif-btn">🔔<span class="notif-dot"></span></button>
       </div>
     </div>
 
-    <!-- MAIN -->
-    <div class="main">
-      <div class="topbar">
-        <div class="page-title" id="topbar-title">Dashboard</div>
-        <div class="topbar-right">
-          <span class="date-badge">Marzo 2026</span>
-          <button class="notif-btn" onclick="showPage('declaraciones', document.querySelector('.nav-item:nth-child(3))'))">
-            &#128276;
-            <span class="notif-dot"></span>
-          </button>
-        </div>
-      </div>
+    <!-- CONTENT -->
+    <div class="content">
 
-      <div class="content">
-
-        <!-- DASHBOARD -->
-        <div class="page active" id="page-dashboard">
-          <div class="kpi-grid">
-            <div class="kpi gold">
-              <div class="kpi-label">Ingresos del mes</div>
-              <div class="kpi-value">DOP 842,400</div>
-              <div class="kpi-sub">Marzo 2026</div>
-              <div class="kpi-change up">&#8593; +12.4% vs febrero</div>
-            </div>
-            <div class="kpi blue">
-              <div class="kpi-label">Gastos del mes</div>
-              <div class="kpi-value">DOP 521,800</div>
-              <div class="kpi-sub">Marzo 2026</div>
-              <div class="kpi-change down">&#8595; +8.1% vs febrero</div>
-            </div>
-            <div class="kpi green">
-              <div class="kpi-label">Utilidad neta</div>
-              <div class="kpi-value">DOP 320,600</div>
-              <div class="kpi-sub">Margen: 38.1%</div>
-              <div class="kpi-change up">&#8593; Saludable</div>
-            </div>
-            <div class="kpi red">
-              <div class="kpi-label">ITBIS pendiente</div>
-              <div class="kpi-value">DOP 42,800</div>
-              <div class="kpi-sub">Vence: 20 Abr 2026</div>
-              <div class="kpi-change down">&#9888; Proxima declaracion</div>
-            </div>
+      <!-- ── DASHBOARD ── -->
+      <div class="page active" id="page-dashboard">
+        <!-- KPIs -->
+        <div class="kpi-grid">
+          <div class="kpi gold">
+            <div class="kpi-label">Ingresos · Mar 2026</div>
+            <div class="kpi-value">DOP 685K</div>
+            <div class="kpi-sub">vs DOP 609K feb</div>
+            <div class="kpi-change up">▲ +12.4% vs mes anterior</div>
           </div>
+          <div class="kpi blue">
+            <div class="kpi-label">Gastos · Mar 2026</div>
+            <div class="kpi-value">DOP 412K</div>
+            <div class="kpi-sub">vs DOP 398K feb</div>
+            <div class="kpi-change down">▼ +3.5% vs mes anterior</div>
+          </div>
+          <div class="kpi green">
+            <div class="kpi-label">Utilidad neta</div>
+            <div class="kpi-value">DOP 273K</div>
+            <div class="kpi-sub">Margen 39.9%</div>
+            <div class="kpi-change up">▲ Mejor trimestre</div>
+          </div>
+          <div class="kpi red">
+            <div class="kpi-label">Obligaciones fiscales</div>
+            <div class="kpi-value">DOP 83.8K</div>
+            <div class="kpi-sub">ITBIS + ISR pendientes</div>
+            <div class="kpi-change down">⚠ Vence 20 abr</div>
+          </div>
+        </div>
 
-          <div class="dash-grid">
-            <div class="card-box">
-              <div class="card-header">
-                <div class="card-title-sm">Ingresos vs Gastos (Oct 2025 - Mar 2026)</div>
-                <div style="display:flex;gap:12px;">
-                  <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#6b7280;"><span style="width:10px;height:10px;background:#1a5276;border-radius:2px;display:inline-block;"></span> Ingresos</div>
-                  <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#6b7280;"><span style="width:10px;height:10px;background:#c9a84c;border-radius:2px;display:inline-block;"></span> Gastos</div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-bars">
-                  <div class="bar-group"><div class="bar income" style="height:60%;width:50%" title="Oct: DOP 520k"></div><div class="bar expense" style="height:45%;width:50%" title="Oct: DOP 390k"></div></div>
-                  <div class="bar-group"><div class="bar income" style="height:55%;width:50%"></div><div class="bar expense" style="height:42%;width:50%"></div></div>
-                  <div class="bar-group"><div class="bar income" style="height:75%;width:50%"></div><div class="bar expense" style="height:60%;width:50%"></div></div>
-                  <div class="bar-group"><div class="bar income" style="height:80%;width:50%"></div><div class="bar expense" style="height:65%;width:50%"></div></div>
-                  <div class="bar-group"><div class="bar income" style="height:70%;width:50%"></div><div class="bar expense" style="height:55%;width:50%"></div></div>
-                  <div class="bar-group"><div class="bar income" style="height:100%;width:50%"></div><div class="bar expense" style="height:62%;width:50%"></div></div>
-                </div>
-                <div class="chart-labels">
-                  <div class="chart-label">Oct</div><div class="chart-label">Nov</div><div class="chart-label">Dic</div><div class="chart-label">Ene</div><div class="chart-label">Feb</div><div class="chart-label">Mar</div>
-                </div>
-              </div>
+        <!-- Charts + Alerts -->
+        <div class="dash-grid">
+          <div class="card-box">
+            <div class="card-header">
+              <div class="card-title-sm">Ingresos vs Gastos — 2026</div>
             </div>
-
-            <div class="card-box">
-              <div class="card-header"><div class="card-title-sm">&#128276; Alertas DGII</div></div>
-              <div class="card-body">
-                <div class="alert-list">
-                  <div class="alert-item danger">
-                    <span class="alert-dot"></span>
-                    <div><div class="alert-title">ITBIS Marzo 2026</div><div class="alert-desc">Vence el 20 de abril. Monto: DOP 42,800</div></div>
-                  </div>
-                  <div class="alert-item warning">
-                    <span class="alert-dot"></span>
-                    <div><div class="alert-title">IR-2 Anual 2025</div><div class="alert-desc">Vence el 30 de abril. En preparacion.</div></div>
-                  </div>
-                  <div class="alert-item info">
-                    <span class="alert-dot"></span>
-                    <div><div class="alert-title">TSS Marzo 2026</div><div class="alert-desc">Enviada correctamente el 10 de marzo.</div></div>
-                  </div>
-                </div>
+            <div class="card-body">
+              <div class="chart-bars">
+                <div class="bar-group"><div class="bar income" style="height:72px"></div><div class="bar expense" style="height:56px"></div></div>
+                <div class="bar-group"><div class="bar income" style="height:84px"></div><div class="bar expense" style="height:60px"></div></div>
+                <div class="bar-group"><div class="bar income" style="height:78px"></div><div class="bar expense" style="height:59px"></div></div>
+                <div class="bar-group"><div class="bar income" style="height:96px"></div><div class="bar expense" style="height:62px"></div></div>
+                <div class="bar-group"><div class="bar income" style="height:88px"></div><div class="bar expense" style="height:66px"></div></div>
+                <div class="bar-group"><div class="bar income" style="height:108px"></div><div class="bar expense" style="height:70px"></div></div>
+              </div>
+              <div class="chart-labels">
+                <div class="chart-label">Oct</div>
+                <div class="chart-label">Nov</div>
+                <div class="chart-label">Dic</div>
+                <div class="chart-label">Ene</div>
+                <div class="chart-label">Feb</div>
+                <div class="chart-label">Mar</div>
+              </div>
+              <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Ingresos</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div> Gastos</div>
               </div>
             </div>
           </div>
 
           <div class="card-box">
             <div class="card-header">
-              <div class="card-title-sm">Transacciones recientes</div>
-              <button class="btn-primary" onclick="showPage('documentos', document.querySelectorAll('.nav-item')[1])">Ver documentos</button>
+              <div class="card-title-sm">Alertas activas</div>
             </div>
             <div class="card-body">
-              <table class="recent-table">
-                <thead><tr><th>Descripcion</th><th>Fecha</th><th>Monto</th><th>Tipo</th><th>Estado</th></tr></thead>
-                <tbody>
-                  <tr><td>Ingresos habitaciones semana 1</td><td>01 Mar 2026</td><td style="color:#16a34a;font-weight:bold;">+DOP 210,000</td><td>Ingreso</td><td><span class="status-badge enviada">Registrado</span></td></tr>
-                  <tr><td>Pago nomina febrero</td><td>05 Mar 2026</td><td style="color:#dc2626;font-weight:bold;">-DOP 85,000</td><td>Gasto</td><td><span class="status-badge enviada">Registrado</span></td></tr>
-                  <tr><td>Ingresos restaurante semana 1</td><td>07 Mar 2026</td><td style="color:#16a34a;font-weight:bold;">+DOP 48,500</td><td>Ingreso</td><td><span class="status-badge enviada">Registrado</span></td></tr>
-                  <tr><td>Pago servicios publicos</td><td>10 Mar 2026</td><td style="color:#dc2626;font-weight:bold;">-DOP 32,400</td><td>Gasto</td><td><span class="status-badge enviada">Registrado</span></td></tr>
-                  <tr><td>Ingresos habitaciones semana 2</td><td>15 Mar 2026</td><td style="color:#16a34a;font-weight:bold;">+DOP 198,000</td><td>Ingreso</td><td><span class="status-badge proceso">En proceso</span></td></tr>
-                  <tr><td>Pago proveedor alimentos</td><td>18 Mar 2026</td><td style="color:#dc2626;font-weight:bold;">-DOP 41,200</td><td>Gasto</td><td><span class="status-badge pendiente">Pendiente</span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- DOCUMENTOS -->
-        <div class="page" id="page-documentos">
-          <div class="section-header">
-            <h2>Documentos y Reportes</h2>
-            <button class="btn-primary">&#43; Solicitar documento</button>
-          </div>
-          <div class="doc-filters">
-            <button class="filter-btn active" onclick="setFilter(this)">Todos</button>
-            <button class="filter-btn" onclick="setFilter(this)">Estados Financieros</button>
-            <button class="filter-btn" onclick="setFilter(this)">Declaraciones</button>
-            <button class="filter-btn" onclick="setFilter(this)">Nomina</button>
-            <button class="filter-btn" onclick="setFilter(this)">Auditoria</button>
-          </div>
-          <div class="doc-grid">
-            <div class="doc-card"><div class="doc-icon">&#128196;</div><div class="doc-name">Estado de Resultados - Mar 2026</div><div class="doc-meta">PDF · 2.1 MB · Subido: 01 Abr 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando: Estado de Resultados Mar 2026.pdf')">&#11015; Descargar</button><button class="btn-sm secondary">&#128065; Ver</button></div></div>
-            <div class="doc-card"><div class="doc-icon">&#128196;</div><div class="doc-name">Balance General - Mar 2026</div><div class="doc-meta">PDF · 1.8 MB · Subido: 01 Abr 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando: Balance General Mar 2026.pdf')">&#11015; Descargar</button><button class="btn-sm secondary">&#128065; Ver</button></div></div>
-            <div class="doc-card"><div class="doc-icon">&#128203;</div><div class="doc-name">Flujo de Caja - Mar 2026</div><div class="doc-meta">PDF · 0.9 MB · Subido: 01 Abr 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando: Flujo de Caja Mar 2026.pdf')">&#11015; Descargar</button><button class="btn-sm secondary">&#128065; Ver</button></div></div>
-            <div class="doc-card"><div class="doc-icon">&#127963;</div><div class="doc-name">Declaracion IT-1 - Mar 2026</div><div class="doc-meta">PDF · 1.2 MB · Enviada: 18 Mar 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando: IT-1 Mar 2026.pdf')">&#11015; Descargar</button><button class="btn-sm secondary">&#128065; Ver</button></div></div>
-            <div class="doc-card"><div class="doc-icon">&#128188;</div><div class="doc-name">Nomina y TSS - Mar 2026</div><div class="doc-meta">PDF · 0.7 MB · Subido: 05 Mar 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando: Nomina Mar 2026.pdf')">&#11015; Descargar</button><button class="btn-sm secondary">&#128065; Ver</button></div></div>
-            <div class="doc-card" style="border:2px dashed #d1d5db;background:#f9fafb;align-items:center;justify-content:center;text-align:center;cursor:pointer;" onclick="alert('Solicitud enviada a tu CPA.')"><div class="doc-icon" style="color:#9ca3af;">&#43;</div><div class="doc-name" style="color:#6b7280;">Solicitar nuevo documento</div><div class="doc-meta">Tu CPA lo preparara en 24-48 hrs</div></div>
-          </div>
-        </div>
-
-        <!-- DECLARACIONES -->
-        <div class="page" id="page-declaraciones">
-          <div class="section-header">
-            <h2>Estado de Declaraciones Fiscales</h2>
-            <button class="btn-primary" onclick="alert('Tu CPA esta siendo notificado.')">&#128172; Consultar con CPA</button>
-          </div>
-          <table class="decl-table">
-            <thead><tr><th>Tipo</th><th>Periodo</th><th>Monto</th><th>Fecha limite</th><th>Fecha envio</th><th>Estado</th></tr></thead>
-            <tbody>
-              <tr><td><strong>ITBIS (IT-1)</strong></td><td>Mar 2026</td><td>DOP 42,800</td><td>20 Abr 2026</td><td>—</td><td><span class="status-badge pendiente">Pendiente</span></td></tr>
-              <tr><td><strong>ITBIS (IT-1)</strong></td><td>Feb 2026</td><td>DOP 38,200</td><td>20 Mar 2026</td><td>18 Mar 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
-              <tr><td><strong>ITBIS (IT-1)</strong></td><td>Ene 2026</td><td>DOP 41,500</td><td>20 Feb 2026</td><td>17 Feb 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
-              <tr><td><strong>IR-2 Anual</strong></td><td>2025</td><td>DOP 185,000</td><td>30 Abr 2026</td><td>—</td><td><span class="status-badge proceso">En preparacion</span></td></tr>
-              <tr><td><strong>IR-2 Anual</strong></td><td>2024</td><td>DOP 162,400</td><td>30 Abr 2025</td><td>25 Abr 2025</td><td><span class="status-badge enviada">Enviada</span></td></tr>
-              <tr><td><strong>TSS</strong></td><td>Mar 2026</td><td>DOP 28,400</td><td>10 Mar 2026</td><td>08 Mar 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
-              <tr><td><strong>TSS</strong></td><td>Feb 2026</td><td>DOP 28,400</td><td>10 Feb 2026</td><td>09 Feb 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
-              <tr><td><strong>Retencion ISR</strong></td><td>Mar 2026</td><td>DOP 12,600</td><td>10 Abr 2026</td><td>—</td><td><span class="status-badge pendiente">Pendiente</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- CHAT -->
-        <div class="page" id="page-chat">
-          <div class="section-header"><h2>Chat con tu CPA</h2></div>
-          <div class="chat-layout">
-            <div class="chat-sidebar">
-              <div class="chat-sidebar-header">Tu equipo Contur</div>
-              <div class="chat-contact active">
-                <div class="contact-avatar" style="background:#1a5276;">MR</div>
-                <div><div class="contact-name">Maria Rodriguez</div><div class="contact-role">CPA Principal</div></div>
-                <div class="online-dot"></div>
-              </div>
-              <div class="chat-contact">
-                <div class="contact-avatar" style="background:#c9a84c;color:#0d1b2a;">JG</div>
-                <div><div class="contact-name">Juan Garcia</div><div class="contact-role">Especialista Fiscal</div></div>
-              </div>
-              <div class="chat-contact">
-                <div class="contact-avatar" style="background:#374151;">SC</div>
-                <div><div class="contact-name">Soporte Contur</div><div class="contact-role">Atencion al cliente</div></div>
-                <div class="online-dot"></div>
-              </div>
-            </div>
-            <div class="chat-main">
-              <div class="chat-header">
-                <div class="contact-avatar" style="background:#1a5276;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;color:#fff;">MR</div>
-                <div><div style="font-size:14px;font-weight:bold;">Maria Rodriguez</div><div style="font-size:11px;color:#16a34a;">En linea</div></div>
-              </div>
-              <div class="chat-messages" id="chat-messages">
-                <div class="msg recv"><div class="msg-bubble">Buenos dias! Ya subi el Estado de Resultados de marzo. Todo se ve muy bien este mes, los ingresos crecieron un 12.4%.</div><div class="msg-time">9:14 AM</div></div>
-                <div class="msg sent"><div class="msg-bubble">Excelente! Y el ITBIS de marzo, cuando lo enviamos?</div><div class="msg-time">9:22 AM</div></div>
-                <div class="msg recv"><div class="msg-bubble">El vencimiento es el 20 de abril. Ya lo tengo casi listo, esta semana te lo comparto para revision antes de enviarlo a la DGII.</div><div class="msg-time">9:24 AM</div></div>
-                <div class="msg recv"><div class="msg-bubble">Tambien necesito que me confirmes los ingresos de la segunda quincena de marzo. Tengo los datos pero quiero asegurarme que esten completos.</div><div class="msg-time">9:25 AM</div></div>
-                <div class="msg sent"><div class="msg-bubble">Claro, te envio los registros hoy en la tarde. Gracias Maria!</div><div class="msg-time">9:30 AM</div></div>
-              </div>
-              <div class="chat-input-area">
-                <input type="text" class="chat-input" id="chat-input" placeholder="Escribe un mensaje..." onkeypress="if(event.key==='Enter') sendMsg()">
-                <button class="btn-send" onclick="sendMsg()">&#10148;</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PERFIL -->
-        <div class="page" id="page-perfil">
-          <div class="section-header"><h2>Perfil de Empresa</h2><button class="btn-primary" onclick="alert('Cambios guardados correctamente.')">Guardar cambios</button></div>
-          <div class="perfil-grid">
-            <div>
-              <div class="perfil-card" style="margin-bottom:20px;">
-                <div class="perfil-card-title">Informacion de la empresa</div>
-                <div class="perfil-field"><div class="perfil-label">Nombre de la empresa</div><input class="perfil-input" value="Hotel Caribe S.R.L."></div>
-                <div class="perfil-field"><div class="perfil-label">RNC</div><input class="perfil-input" value="1-31-00001-2"></div>
-                <div class="perfil-field"><div class="perfil-label">Tipo de empresa</div><input class="perfil-input" value="Hotel / Alojamiento turístico"></div>
-                <div class="perfil-field"><div class="perfil-label">Direccion</div><input class="perfil-input" value="Haras Nacionales, Santo Domingo, R.D."></div>
-                <div class="perfil-field"><div class="perfil-label">Telefono</div><input class="perfil-input" value="809-555-1234"></div>
-                <div class="perfil-field"><div class="perfil-label">Correo electronico</div><input class="perfil-input" value="hotel@caribe.com"></div>
-              </div>
-              <div class="perfil-card">
-                <div class="perfil-card-title">Representante legal</div>
-                <div class="perfil-field"><div class="perfil-label">Nombre completo</div><input class="perfil-input" value="Carlos Mejia Santos"></div>
-                <div class="perfil-field"><div class="perfil-label">Cedula</div><input class="perfil-input" value="001-0000001-1"></div>
-                <div class="perfil-field"><div class="perfil-label">Cargo</div><input class="perfil-input" value="Gerente General"></div>
-              </div>
-            </div>
-            <div>
-              <div class="plan-info" style="margin-bottom:20px;">
-                <div style="font-size:11px;color:rgba(255,255,255,0.4);font-weight:bold;letter-spacing:1px;margin-bottom:8px;">PLAN ACTIVO</div>
-                <div class="plan-info-name">Plan Estandar</div>
-                <div class="plan-info-desc">Renovacion: 1 de mayo 2026 · DOP 22,000/mes</div>
-                <div class="plan-feature">Contabilidad mensual completa</div>
-                <div class="plan-feature">Declaraciones DGII mensuales</div>
-                <div class="plan-feature">Gestion de nomina y TSS</div>
-                <div class="plan-feature">Estados financieros completos</div>
-                <div class="plan-feature">Acceso al portal de clientes</div>
-                <div class="plan-feature">Reunion mensual de revision</div>
-                <br>
-                <button class="btn-primary" onclick="alert('Un asesor te contactara para hacer el upgrade.')">Mejorar a Premium</button>
-              </div>
-              <div class="perfil-card">
-                <div class="perfil-card-title">Tu CPA asignado</div>
-                <div class="cpa-card">
-                  <div class="cpa-avatar">MR</div>
-                  <div>
-                    <div class="cpa-name">Maria Rodriguez, CPA</div>
-                    <div class="cpa-role">Contadora Principal — Contur</div>
-                    <div class="cpa-contact">&#128222; 809-000-0001 · maria@contur.com.do</div>
-                  </div>
+              <div class="alert-list">
+                <div class="alert-item danger">
+                  <div class="alert-dot"></div>
+                  <div><div class="alert-title">ITBIS marzo vence pronto</div><div class="alert-desc">Fecha límite: 20 abril 2026. DOP 42,800 por pagar.</div></div>
+                </div>
+                <div class="alert-item warning">
+                  <div class="alert-dot"></div>
+                  <div><div class="alert-title">Retención ISR pendiente</div><div class="alert-desc">DOP 12,600 — vence 10 abril 2026.</div></div>
+                </div>
+                <div class="alert-item info">
+                  <div class="alert-dot"></div>
+                  <div><div class="alert-title">IR-2 2025 en preparación</div><div class="alert-desc">Tu CPA está completando la declaración anual.</div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Recientes -->
+        <div class="card-box">
+          <div class="card-header">
+            <div class="card-title-sm">Transacciones recientes</div>
+            <button class="btn-primary" onclick="showPage('documentos', document.querySelectorAll('.nav-item')[1])">Ver documentos</button>
+          </div>
+          <div class="card-body" style="padding:0 22px;">
+            <div class="table-scroll">
+              <table class="recent-table">
+                <thead><tr><th>Descripción</th><th>Fecha</th><th>Monto</th><th>Tipo</th><th>Estado</th></tr></thead>
+                <tbody>
+                  <tr><td>Ingresos habitaciones sem. 1</td><td>01 Mar 2026</td><td style="color:var(--green);font-weight:600;">+DOP 210,000</td><td>Ingreso</td><td><span class="status-badge enviada">Registrado</span></td></tr>
+                  <tr><td>Pago nómina febrero</td><td>05 Mar 2026</td><td style="color:var(--red);font-weight:600;">−DOP 85,000</td><td>Gasto</td><td><span class="status-badge enviada">Registrado</span></td></tr>
+                  <tr><td>Ingresos restaurante sem. 1</td><td>07 Mar 2026</td><td style="color:var(--green);font-weight:600;">+DOP 48,500</td><td>Ingreso</td><td><span class="status-badge enviada">Registrado</span></td></tr>
+                  <tr><td>Pago servicios públicos</td><td>10 Mar 2026</td><td style="color:var(--red);font-weight:600;">−DOP 32,400</td><td>Gasto</td><td><span class="status-badge enviada">Registrado</span></td></tr>
+                  <tr><td>Ingresos habitaciones sem. 2</td><td>15 Mar 2026</td><td style="color:var(--green);font-weight:600;">+DOP 198,000</td><td>Ingreso</td><td><span class="status-badge proceso">En proceso</span></td></tr>
+                  <tr><td>Pago proveedor alimentos</td><td>18 Mar 2026</td><td style="color:var(--red);font-weight:600;">−DOP 41,200</td><td>Gasto</td><td><span class="status-badge pendiente">Pendiente</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+
+      <!-- ── DOCUMENTOS ── -->
+      <div class="page" id="page-documentos">
+        <div class="section-header">
+          <h2>Documentos y Reportes</h2>
+          <button class="btn-primary" onclick="alert('Solicitud enviada a tu CPA.')">＋ Solicitar documento</button>
+        </div>
+        <div class="doc-filters">
+          <button class="filter-btn active" onclick="filterDocs('todos',this)">Todos</button>
+          <button class="filter-btn" onclick="filterDocs('financiero',this)">Estados Financieros</button>
+          <button class="filter-btn" onclick="filterDocs('declaracion',this)">Declaraciones</button>
+          <button class="filter-btn" onclick="filterDocs('nomina',this)">Nómina</button>
+        </div>
+        <div class="doc-grid" id="doc-grid">
+          <div class="doc-card" data-cat="financiero">
+            <div class="doc-icon">📄</div>
+            <div class="doc-name">Estado de Resultados — Mar 2026</div>
+            <div class="doc-meta">PDF · 2.1 MB · Subido: 01 Abr 2026</div>
+            <div class="doc-actions">
+              <button class="btn-sm primary" onclick="alert('Descargando: Estado de Resultados Mar 2026.pdf')">⬇ Descargar</button>
+              <button class="btn-sm secondary">👁 Ver</button>
+            </div>
+          </div>
+          <div class="doc-card" data-cat="financiero">
+            <div class="doc-icon">📄</div>
+            <div class="doc-name">Balance General — Mar 2026</div>
+            <div class="doc-meta">PDF · 1.8 MB · Subido: 01 Abr 2026</div>
+            <div class="doc-actions">
+              <button class="btn-sm primary" onclick="alert('Descargando: Balance General Mar 2026.pdf')">⬇ Descargar</button>
+              <button class="btn-sm secondary">👁 Ver</button>
+            </div>
+          </div>
+          <div class="doc-card" data-cat="financiero">
+            <div class="doc-icon">📋</div>
+            <div class="doc-name">Flujo de Caja — Mar 2026</div>
+            <div class="doc-meta">PDF · 0.9 MB · Subido: 01 Abr 2026</div>
+            <div class="doc-actions">
+              <button class="btn-sm primary" onclick="alert('Descargando: Flujo de Caja Mar 2026.pdf')">⬇ Descargar</button>
+              <button class="btn-sm secondary">👁 Ver</button>
+            </div>
+          </div>
+          <div class="doc-card" data-cat="declaracion">
+            <div class="doc-icon">🏛</div>
+            <div class="doc-name">Declaración IT-1 — Mar 2026</div>
+            <div class="doc-meta">PDF · 1.2 MB · Enviada: 18 Mar 2026</div>
+            <div class="doc-actions">
+              <button class="btn-sm primary" onclick="alert('Descargando: IT-1 Mar 2026.pdf')">⬇ Descargar</button>
+              <button class="btn-sm secondary">👁 Ver</button>
+            </div>
+          </div>
+          <div class="doc-card" data-cat="nomina">
+            <div class="doc-icon">💼</div>
+            <div class="doc-name">Nómina y TSS — Mar 2026</div>
+            <div class="doc-meta">PDF · 0.7 MB · Subido: 05 Mar 2026</div>
+            <div class="doc-actions">
+              <button class="btn-sm primary" onclick="alert('Descargando: Nómina Mar 2026.pdf')">⬇ Descargar</button>
+              <button class="btn-sm secondary">👁 Ver</button>
+            </div>
+          </div>
+          <div class="doc-card" data-cat="todos" style="border:2px dashed var(--border);background:var(--surface);align-items:center;justify-content:center;text-align:center;cursor:pointer;" onclick="alert('Solicitud enviada a tu CPA.')">
+            <div class="doc-icon" style="color:var(--text-muted);">＋</div>
+            <div class="doc-name" style="color:var(--text-secondary);">Solicitar nuevo documento</div>
+            <div class="doc-meta">Tu CPA lo prepara en 24–48 hrs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── DECLARACIONES ── -->
+      <div class="page" id="page-declaraciones">
+        <div class="section-header">
+          <h2>Estado de Declaraciones Fiscales</h2>
+          <button class="btn-primary" onclick="alert('Tu CPA está siendo notificado.')">💬 Consultar con CPA</button>
+        </div>
+        <div class="table-scroll">
+          <table class="decl-table">
+            <thead><tr><th>Tipo</th><th>Período</th><th>Monto</th><th>Fecha límite</th><th>Fecha envío</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ITBIS (IT-1)</strong></td><td>Mar 2026</td><td>DOP 42,800</td><td>20 Abr 2026</td><td>—</td><td><span class="status-badge pendiente">Pendiente</span></td></tr>
+              <tr><td><strong>ITBIS (IT-1)</strong></td><td>Feb 2026</td><td>DOP 38,200</td><td>20 Mar 2026</td><td>18 Mar 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
+              <tr><td><strong>ITBIS (IT-1)</strong></td><td>Ene 2026</td><td>DOP 41,500</td><td>20 Feb 2026</td><td>17 Feb 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
+              <tr><td><strong>IR-2 Anual</strong></td><td>2025</td><td>DOP 185,000</td><td>30 Abr 2026</td><td>—</td><td><span class="status-badge proceso">En preparación</span></td></tr>
+              <tr><td><strong>IR-2 Anual</strong></td><td>2024</td><td>DOP 162,400</td><td>30 Abr 2025</td><td>25 Abr 2025</td><td><span class="status-badge enviada">Enviada</span></td></tr>
+              <tr><td><strong>TSS</strong></td><td>Mar 2026</td><td>DOP 28,400</td><td>10 Mar 2026</td><td>08 Mar 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
+              <tr><td><strong>TSS</strong></td><td>Feb 2026</td><td>DOP 28,400</td><td>10 Feb 2026</td><td>09 Feb 2026</td><td><span class="status-badge enviada">Enviada</span></td></tr>
+              <tr><td><strong>Retención ISR</strong></td><td>Mar 2026</td><td>DOP 12,600</td><td>10 Abr 2026</td><td>—</td><td><span class="status-badge pendiente">Pendiente</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── CHAT ── -->
+      <div class="page" id="page-chat">
+        <div class="section-header"><h2>Chat con tu CPA</h2></div>
+        <div class="chat-layout">
+          <div class="chat-sidebar">
+            <div class="chat-sidebar-header">Tu equipo Contur</div>
+            <div class="chat-contact active">
+              <div class="contact-avatar" style="background:var(--blue);">MR</div>
+              <div><div class="contact-name">María Rodríguez</div><div class="contact-role">CPA Principal</div></div>
+              <div class="online-dot"></div>
+            </div>
+            <div class="chat-contact">
+              <div class="contact-avatar" style="background:var(--gold);color:var(--navy);">JG</div>
+              <div><div class="contact-name">Juan García</div><div class="contact-role">Especialista Fiscal</div></div>
+            </div>
+            <div class="chat-contact">
+              <div class="contact-avatar" style="background:#4b5563;">SC</div>
+              <div><div class="contact-name">Soporte Contur</div><div class="contact-role">Atención al cliente</div></div>
+            </div>
+          </div>
+          <div class="chat-main">
+            <div class="chat-header">
+              <div class="contact-avatar" style="background:var(--blue);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;">MR</div>
+              <div><div style="font-size:14px;font-weight:600;color:var(--navy);">María Rodríguez</div><div style="font-size:11px;color:var(--green);">En línea</div></div>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+              <div class="msg recv"><div class="msg-bubble">¡Buenos días! Ya subí el Estado de Resultados de marzo. Todo se ve muy bien este mes, los ingresos crecieron un 12.4%.</div><div class="msg-time">9:14 AM</div></div>
+              <div class="msg sent"><div class="msg-bubble">¡Excelente! ¿Y el ITBIS de marzo, cuándo lo enviamos?</div><div class="msg-time">9:22 AM</div></div>
+              <div class="msg recv"><div class="msg-bubble">El vencimiento es el 20 de abril. Ya lo tengo casi listo — esta semana te lo comparto para revisión antes de enviarlo a la DGII.</div><div class="msg-time">9:24 AM</div></div>
+              <div class="msg recv"><div class="msg-bubble">También necesito que me confirmes los ingresos de la segunda quincena de marzo. Tengo los datos pero quiero asegurarme de que estén completos.</div><div class="msg-time">9:25 AM</div></div>
+              <div class="msg sent"><div class="msg-bubble">Claro, te envío los registros hoy en la tarde. ¡Gracias María!</div><div class="msg-time">9:30 AM</div></div>
+            </div>
+            <div class="chat-input-area">
+              <input type="text" class="chat-input" id="chat-input" placeholder="Escribe un mensaje…" onkeypress="if(event.key==='Enter') sendMsg()">
+              <button class="btn-send" onclick="sendMsg()">➤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PERFIL ── -->
+      <div class="page" id="page-perfil">
+        <div class="section-header">
+          <h2>Perfil de Empresa</h2>
+          <button class="btn-primary" onclick="alert('Cambios guardados correctamente.')">Guardar cambios</button>
+        </div>
+        <div class="perfil-grid">
+          <div>
+            <div class="perfil-card" style="margin-bottom:18px;">
+              <div class="perfil-card-title">Información de la empresa</div>
+              <div class="perfil-field"><div class="perfil-label">Nombre de la empresa</div><input class="perfil-input" value="Hotel Caribe S.R.L."></div>
+              <div class="perfil-field"><div class="perfil-label">RNC</div><input class="perfil-input" value="1-31-00001-2"></div>
+              <div class="perfil-field"><div class="perfil-label">Tipo de empresa</div><input class="perfil-input" value="Hotel / Alojamiento turístico"></div>
+              <div class="perfil-field"><div class="perfil-label">Dirección</div><input class="perfil-input" value="Haras Nacionales, Santo Domingo, R.D."></div>
+              <div class="perfil-field"><div class="perfil-label">Teléfono</div><input class="perfil-input" value="809-555-1234"></div>
+              <div class="perfil-field"><div class="perfil-label">Correo electrónico</div><input class="perfil-input" value="hotel@caribe.com"></div>
+            </div>
+            <div class="perfil-card">
+              <div class="perfil-card-title">Representante legal</div>
+              <div class="perfil-field"><div class="perfil-label">Nombre completo</div><input class="perfil-input" value="Carlos Mejía Santos"></div>
+              <div class="perfil-field"><div class="perfil-label">Cédula</div><input class="perfil-input" value="001-0000001-1"></div>
+              <div class="perfil-field"><div class="perfil-label">Cargo</div><input class="perfil-input" value="Gerente General"></div>
+            </div>
+          </div>
+          <div>
+            <div class="plan-info" style="margin-bottom:18px;">
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);font-weight:600;letter-spacing:1.5px;margin-bottom:10px;">PLAN ACTIVO</div>
+              <div class="plan-info-name">Plan Estándar</div>
+              <div class="plan-info-desc">Renovación: 1 de mayo 2026 · DOP 22,000/mes</div>
+              <div class="plan-feature">Contabilidad mensual completa</div>
+              <div class="plan-feature">Declaraciones DGII mensuales</div>
+              <div class="plan-feature">Gestión de nómina y TSS</div>
+              <div class="plan-feature">Estados financieros completos</div>
+              <div class="plan-feature">Acceso al portal de clientes</div>
+              <div class="plan-feature">Reunión mensual de revisión</div>
+              <button class="btn-primary" style="background:var(--gold);color:var(--navy);" onclick="alert('Un asesor te contactará para el upgrade.')">Mejorar a Premium</button>
+            </div>
+            <div class="perfil-card">
+              <div class="perfil-card-title">Tu CPA asignado</div>
+              <div class="cpa-card">
+                <div class="cpa-avatar">MR</div>
+                <div>
+                  <div class="cpa-name">María Rodríguez, CPA</div>
+                  <div class="cpa-role">Contadora Principal — Contur</div>
+                  <div class="cpa-contact">📞 809-000-0001 · maria@contur.com.do</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /portal-screen -->
 
 <script>
+/* ── FECHA ── */
+(function() {
+  const d = new Date();
+  const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+  const str = d.toLocaleDateString('es-DO', opts);
+  document.getElementById('date-display').textContent = str.charAt(0).toUpperCase() + str.slice(1);
+})();
+
+/* ── AUTH ── */
 function doLogin() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('portal-screen').classList.add('active');
 }
-
 function doLogout() {
   document.getElementById('portal-screen').classList.remove('active');
   document.getElementById('login-screen').style.display = 'flex';
+  closeSidebar();
 }
 
+/* ── SIDEBAR MOBILE ── */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+
+/* ── NAVIGATION ── */
 function showPage(name, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (el) el.classList.add('active');
-  const titles = { dashboard: 'Dashboard', documentos: 'Documentos y Reportes', declaraciones: 'Declaraciones Fiscales', chat: 'Chat con tu CPA', perfil: 'Perfil de Empresa' };
+  const titles = {
+    dashboard: 'Dashboard',
+    documentos: 'Documentos y Reportes',
+    declaraciones: 'Declaraciones Fiscales',
+    chat: 'Chat con tu CPA',
+    perfil: 'Perfil de Empresa'
+  };
   document.getElementById('topbar-title').textContent = titles[name] || name;
+  closeSidebar();
 }
 
-function setFilter(btn) {
+/* ── DOC FILTERS ── */
+function filterDocs(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  document.querySelectorAll('#doc-grid .doc-card').forEach(card => {
+    const cardCat = card.dataset.cat;
+    card.style.display = (cat === 'todos' || cardCat === cat || cardCat === 'todos') ? '' : 'none';
+  });
 }
 
+/* ── CHAT ── */
+const replies = [
+  'Recibido, te respondo en breve.',
+  'Perfecto, lo reviso ahora mismo.',
+  'Anotado. Te confirmo en unos minutos.',
+  'Entendido, ya estoy en eso.',
+  'Gracias por la info, la proceso hoy.'
+];
 function sendMsg() {
   const input = document.getElementById('chat-input');
   const text = input.value.trim();
   if (!text) return;
   const msgs = document.getElementById('chat-messages');
   const now = new Date();
-  const time = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+  const time = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
   const div = document.createElement('div');
   div.className = 'msg sent';
-  div.innerHTML = '<div class="msg-bubble">' + text + '</div><div class="msg-time">' + time + ' AM</div>';
+  div.innerHTML = '<div class="msg-bubble">' + text + '</div><div class="msg-time">' + time + '</div>';
   msgs.appendChild(div);
   input.value = '';
   msgs.scrollTop = msgs.scrollHeight;
   setTimeout(() => {
     const resp = document.createElement('div');
     resp.className = 'msg recv';
-    resp.innerHTML = '<div class="msg-bubble">Recibido! Te respondo en breve.</div><div class="msg-time">' + time + ' AM</div>';
+    const r = replies[Math.floor(Math.random() * replies.length)];
+    resp.innerHTML = '<div class="msg-bubble">' + r + '</div><div class="msg-time">' + time + '</div>';
     msgs.appendChild(resp);
     msgs.scrollTop = msgs.scrollHeight;
-  }, 1200);
+  }, 1100);
 }
 </script>
 </body>
