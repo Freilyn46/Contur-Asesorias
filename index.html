@@ -6,7 +6,12 @@
 <title>Contur - Consultoria Contable para el Sector Turistico</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Georgia, serif; color: #1a1a2e; background: #fff; }
+body { 
+  font-family: Georgia, serif; 
+  color: #1a1a2e; 
+  background: #fff; 
+  padding-top: 65px;
+}
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: #0d1b2a; padding: 0 40px; height: 65px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #c9a84c; }
 .logo { color: #fff; font-size: 26px; font-weight: bold; letter-spacing: 3px; }
 .logo span { color: #c9a84c; }
@@ -178,6 +183,34 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
   footer { padding: 30px 20px; }
   .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+}
+  @media (max-width: 768px) {
+  nav {
+    padding: 0 15px;
+    height: 60px;
+  }
+
+  body {
+    padding-top: 60px;
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  #inicio {
+    padding: 60px 20px;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 30px;
+  }
 }
 </style>
 </head>
