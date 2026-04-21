@@ -12,34 +12,111 @@ body {
   background: #fff; 
   padding-top: 65px;
 }
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: #0d1b2a; padding: 0 40px; height: 65px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #c9a84c; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: #0d1b2a; padding: 0 40px; height: 65px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 2px solid #c9a84c;
+}
 .logo { color: #fff; font-size: 26px; font-weight: bold; letter-spacing: 3px; }
 .logo span { color: #c9a84c; }
-.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
 .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-family: Arial, sans-serif; font-size: 14px; }
 .nav-links a:hover { color: #c9a84c; }
 .nav-btn { background: #c9a84c; color: #0d1b2a !important; padding: 8px 20px; border-radius: 4px; font-weight: bold !important; }
-#inicio { min-height: 100vh; background: #0d1b2a; display: flex; align-items: center; padding: 100px 40px 60px; }
-.hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.hero-tag { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: #c9a84c; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
+
+/* ── HAMBURGER (mobile only) ── */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: #fff; border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* Mobile nav drawer */
+.mobile-menu {
+  display: none;
+  position: fixed; top: 65px; left: 0; right: 0;
+  background: #0d1b2a;
+  border-bottom: 2px solid #c9a84c;
+  z-index: 998;
+  padding: 16px 24px;
+  flex-direction: column; gap: 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: rgba(255,255,255,0.85); text-decoration: none;
+  font-family: Arial, sans-serif; font-size: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: #c9a84c; }
+.mobile-menu .m-nav-btn {
+  margin-top: 12px;
+  background: #c9a84c; color: #0d1b2a;
+  text-align: center; font-weight: bold;
+  border-radius: 4px; padding: 12px;
+  border-bottom: none;
+}
+
+/* ── HERO ── */
+#inicio {
+  min-height: 100vh; background: #0d1b2a;
+  display: flex; align-items: center;
+  padding: 100px 40px 60px;
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+}
+.hero-tag {
+  display: inline-block; background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.4); color: #c9a84c;
+  font-family: Arial, sans-serif; font-size: 11px; font-weight: bold;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
 .hero-title { font-size: 48px; color: #fff; line-height: 1.15; margin-bottom: 20px; }
 .hero-title span { color: #c9a84c; }
 .hero-desc { font-family: Arial, sans-serif; font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.8; margin-bottom: 32px; }
-.btn-gold { display: inline-block; background: #c9a84c; color: #0d1b2a; padding: 13px 30px; border-radius: 4px; font-family: Arial, sans-serif; font-weight: bold; font-size: 15px; text-decoration: none; margin-right: 12px; cursor: pointer; border: none; }
+.btn-gold {
+  display: inline-block; background: #c9a84c; color: #0d1b2a;
+  padding: 13px 30px; border-radius: 4px; font-family: Arial, sans-serif;
+  font-weight: bold; font-size: 15px; text-decoration: none;
+  margin-right: 12px; cursor: pointer; border: none;
+}
 .btn-gold:hover { background: #f0c84e; }
-.btn-outline { display: inline-block; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 13px 30px; border-radius: 4px; font-family: Arial, sans-serif; font-size: 15px; text-decoration: none; cursor: pointer; background: none; }
+.btn-outline {
+  display: inline-block; border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; padding: 13px 30px; border-radius: 4px;
+  font-family: Arial, sans-serif; font-size: 15px;
+  text-decoration: none; cursor: pointer; background: none;
+}
 .btn-outline:hover { border-color: #c9a84c; color: #c9a84c; }
+
 .stats-box { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; }
 .stat { padding: 28px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.07); }
 .stat:last-child { border-bottom: none; }
 .stat-num { font-size: 40px; color: #c9a84c; font-weight: bold; display: block; }
 .stat-lbl { font-family: Arial, sans-serif; font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+/* ── SECTIONS ── */
 section { padding: 80px 40px; }
 .section-inner { max-width: 1100px; margin: 0 auto; }
 .section-tag { font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #1a5276; display: block; margin-bottom: 12px; }
 .section-title { font-size: 38px; color: #0d1b2a; line-height: 1.2; margin-bottom: 16px; }
 .section-desc { font-family: Arial, sans-serif; font-size: 16px; color: #6b7280; line-height: 1.8; margin-bottom: 28px; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+/* ── PROBLEMA ── */
 #problema { background: #f5f0e8; }
 .big-stat { background: #0d1b2a; border-radius: 14px; padding: 50px 40px; text-align: center; }
 .big-num { font-size: 90px; color: #c9a84c; line-height: 1; display: block; }
@@ -48,6 +125,8 @@ section { padding: 80px 40px; }
 .check-list li { font-family: Arial, sans-serif; font-size: 15px; color: #6b7280; padding: 8px 0; border-bottom: 1px solid #e5e7eb; display: flex; gap: 10px; align-items: flex-start; }
 .check-list li:last-child { border-bottom: none; }
 .chk { background: #1a5276; color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+
+/* ── SERVICIOS ── */
 #servicios { background: #fff; }
 .services-header { text-align: center; margin-bottom: 50px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -57,6 +136,12 @@ section { padding: 80px 40px; }
 .card-title { font-size: 18px; color: #0d1b2a; margin-bottom: 10px; }
 .card-desc { font-family: Arial, sans-serif; font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 14px; }
 .card-tag { background: #f3f4f6; color: #1a5276; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+
+/* ── TALLER ── */
+#taller { background: #fff; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+/* ── INNOVACION ── */
 #innovacion { background: #0d1b2a; }
 .innov-header { text-align: center; margin-bottom: 50px; }
 .innov-header .section-tag { color: #c9a84c; }
@@ -71,6 +156,8 @@ section { padding: 80px 40px; }
 .innov-desc { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 14px; }
 .innov-impact { background: rgba(201,168,76,0.1); border-left: 3px solid #c9a84c; padding: 8px 12px; font-family: Arial, sans-serif; font-size: 12px; color: #c9a84c; font-weight: bold; }
 .innov-badge { background: #c9a84c; color: #0d1b2a; font-family: Arial, sans-serif; font-size: 10px; font-weight: bold; padding: 3px 8px; border-radius: 10px; letter-spacing: 1px; }
+
+/* ── PLANES ── */
 #planes { background: #f3f4f6; }
 .planes-header { text-align: center; margin-bottom: 50px; }
 .grid-3-planes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
@@ -88,17 +175,17 @@ section { padding: 80px 40px; }
 .plan-features { list-style: none; margin-bottom: 24px; }
 .plan-features li { font-family: Arial, sans-serif; font-size: 13px; color: #4b5563; padding: 6px 0; display: flex; gap: 8px; }
 .plan.featured .plan-features li { color: rgba(255,255,255,0.75); }
-.plan-features li::before { content: "v"; color: #c9a84c; font-weight: bold; flex-shrink: 0; }
+.plan-features li::before { content: "✓"; color: #c9a84c; font-weight: bold; flex-shrink: 0; }
 .plan-btn { width: 100%; padding: 11px; border-radius: 6px; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; cursor: pointer; border: 1px solid #c9a84c; background: transparent; color: #1a5276; }
 .plan.featured .plan-btn { background: #c9a84c; color: #0d1b2a; border-color: #c9a84c; }
 .plan-btn:hover { background: #c9a84c; color: #0d1b2a; }
+
+/* ── PORTAL ── */
 #portal { background: #fff; }
 .mockup { background: #0d1b2a; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
 .mockup-bar { background: #1a2e45; padding: 12px 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.dot-r { background: #ff5f56; }
-.dot-y { background: #ffbd2e; }
-.dot-g { background: #27c93f; }
+.dot-r{background:#ff5f56}.dot-y{background:#ffbd2e}.dot-g{background:#27c93f}
 .mockup-url { font-family: Arial, sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); margin: 0 auto; }
 .mockup-body { padding: 22px; }
 .m-greet { font-family: Arial, sans-serif; font-size: 12px; color: rgba(255,255,255,0.4); }
@@ -118,28 +205,36 @@ section { padding: 80px 40px; }
 .pf-icon { width: 44px; height: 44px; background: #0d1b2a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .pf-title { font-size: 17px; color: #0d1b2a; margin-bottom: 5px; }
 .pf-desc { font-family: Arial, sans-serif; font-size: 13px; color: #6b7280; line-height: 1.6; }
+
+/* ── CONTACTO ── */
 #contacto { background: #f3f4f6; }
 .form-box { background: #fff; border-radius: 14px; padding: 40px; }
 .form-title { font-size: 26px; color: #0d1b2a; margin-bottom: 28px; }
 .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-group { margin-bottom: 16px; }
 .form-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; color: #0d1b2a; display: block; margin-bottom: 6px; }
-.form-input, .form-select, .form-textarea { width: 100%; padding: 11px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-family: Arial, sans-serif; font-size: 14px; color: #1a1a2e; background: #fff; outline: none; }
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #1a5276; }
+.form-input,.form-select,.form-textarea { width: 100%; padding: 11px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-family: Arial, sans-serif; font-size: 14px; color: #1a1a2e; background: #fff; outline: none; }
+.form-input:focus,.form-select:focus,.form-textarea:focus { border-color: #1a5276; }
 .form-textarea { height: 110px; resize: vertical; }
+
+/* ── CONTACT INFO ── */
 .ci-list { display: flex; flex-direction: column; gap: 20px; margin-top: 28px; }
 .ci { display: flex; gap: 14px; align-items: flex-start; }
 .ci-icon { width: 42px; height: 42px; background: #0d1b2a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 .ci-label { font-family: Arial, sans-serif; font-size: 11px; color: #9ca3af; font-weight: bold; letter-spacing: 0.5px; }
 .ci-val { font-family: Arial, sans-serif; font-size: 14px; color: #0d1b2a; font-weight: 500; margin-top: 2px; }
+
+/* ── FOOTER ── */
 footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201,168,76,0.25); }
 .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
 .footer-logo { font-size: 22px; font-weight: bold; color: #fff; letter-spacing: 2px; }
 .footer-logo span { color: #c9a84c; }
 .footer-sub { font-family: Arial, sans-serif; font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 6px; }
-.footer-links { display: flex; gap: 24px; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
 .footer-links a { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; }
 .footer-links a:hover { color: #c9a84c; }
+
+/* ── MODAL ── */
 .modal-bg { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.75); align-items: center; justify-content: center; }
 .modal-bg.open { display: flex; }
 .modal { background: #fff; border-radius: 14px; padding: 44px; width: 420px; max-width: 95vw; position: relative; }
@@ -149,75 +244,96 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
 .modal-sub { text-align: center; font-family: Arial, sans-serif; font-size: 13px; color: #6b7280; margin-bottom: 24px; }
 .modal-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 10px 14px; font-family: Arial, sans-serif; font-size: 12px; color: #1a5276; text-align: center; margin-bottom: 20px; }
 
+/* ════════════════════════════════════════
+   MOBILE RESPONSIVE — FIXES COMPLETOS
+   ════════════════════════════════════════ */
 @media (max-width: 768px) {
-  nav { padding: 0 20px; }
-  .nav-links { display: none; }
-  nav::after { content: 'CONTUR'; font-size: 20px; font-weight: bold; color: #c9a84c; letter-spacing: 3px; position: absolute; left: 50%; transform: translateX(-50%); }
+  body { padding-top: 60px; }
+  nav { padding: 0 20px; height: 60px; }
 
-  #inicio { padding: 90px 20px 40px; }
-  .hero-inner { grid-template-columns: 1fr; gap: 30px; }
+  /* Ocultar links del nav en mobile */
+  .nav-links { display: none !important; }
+
+  /* Mostrar hamburger */
+  .hamburger { display: flex; }
+
+  /* ── HERO ── */
+  #inicio { padding: 40px 20px 50px; min-height: auto; }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
   .hero-title { font-size: 32px; }
   .hero-desc { font-size: 15px; }
-  .btn-gold, .btn-outline { padding: 11px 20px; font-size: 14px; display: block; text-align: center; margin-bottom: 12px; margin-right: 0; }
-  .stats-box { margin-top: 10px; }
+  .btn-gold, .btn-outline {
+    display: block; width: 100%; text-align: center;
+    margin-right: 0; margin-bottom: 12px;
+    padding: 14px 20px;
+  }
+  .stats-box { margin-top: 0; }
   .stat-num { font-size: 32px; }
 
+  /* ── SECTIONS ── */
   section { padding: 50px 20px; }
-  .section-title { font-size: 28px; }
-  .two-col { grid-template-columns: 1fr; gap: 30px; }
-  .big-num { font-size: 70px; }
+  .section-title { font-size: 26px; }
+  .section-desc { font-size: 14px; }
 
-  .grid-3 { grid-template-columns: 1fr; gap: 16px; }
+  /* ── TWO-COL → single col ── */
+  .two-col { grid-template-columns: 1fr; gap: 30px; }
+
+  /* ── BIG STAT ── */
+  .big-num { font-size: 64px; }
+  .big-stat { padding: 36px 24px; }
+
+  /* ── CARDS ── */
+  .grid-3 { grid-template-columns: 1fr; gap: 14px; }
   .card { padding: 22px; }
 
-  #innovacion .grid-2 { grid-template-columns: 1fr; gap: 16px; }
+  /* ── INNOVACION ── */
+  .grid-2 { grid-template-columns: 1fr; gap: 16px; }
+  .innov-card { padding: 24px; }
 
+  /* ── PLANES ── */
   .grid-3-planes { grid-template-columns: 1fr; gap: 16px; }
   .plan.featured { transform: none; }
 
-  .two-col .mockup { margin-bottom: 20px; }
-
-  .form-box { padding: 24px; }
+  /* ── CONTACTO ── */
+  .form-box { padding: 24px 20px; }
   .form-row2 { grid-template-columns: 1fr; gap: 0; }
 
+  /* ── CONTACT INFO — fix el layout roto ── */
+  .ci-list { gap: 16px; }
+  .ci { align-items: flex-start; }
+  .ci-icon { width: 38px; height: 38px; font-size: 15px; flex-shrink: 0; }
+  .ci-val { font-size: 13px; word-break: break-word; }
+
+  /* ── FOOTER ── */
   footer { padding: 30px 20px; }
   .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
-  .footer-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+  .footer-links { justify-content: center; gap: 14px; }
+
+  /* ── PORTAL MOCKUP ── */
+  .m-val { font-size: 16px; }
+  .m-row-lbl { font-size: 11px; }
+
+  /* ── TALLER ── */
+  #taller .two-col { gap: 24px; }
 }
-  @media (max-width: 768px) {
-  nav {
-    padding: 0 15px;
-    height: 60px;
-  }
 
-  body {
-    padding-top: 60px;
-  }
-
-  .nav-links {
-    gap: 10px;
-  }
-
-  .logo {
-    font-size: 18px;
-  }
-
-  #inicio {
-    padding: 60px 20px;
-  }
-
-  .hero-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 30px;
-  }
+@media (max-width: 400px) {
+  .hero-title { font-size: 26px; }
+  .section-title { font-size: 22px; }
 }
 </style>
 </head>
 <body>
 
+<!-- ── NAVIGATION ── -->
 <nav>
   <div class="logo">CON<span>TUR</span></div>
+
+  <!-- Desktop links -->
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#servicios">Servicios</a></li>
@@ -225,10 +341,27 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
     <li><a href="#planes">Planes</a></li>
     <li><a href="#portal">Portal</a></li>
     <li><a href="#contacto">Contacto</a></li>
-    <li><a href="contur-portal.html" class="nav-btn">Acceder al Portal</a></li>
+    <li><a href="#" class="nav-btn" onclick="abrirPortal();return false;">Acceder al Portal</a></li>
   </ul>
+
+  <!-- Hamburger (mobile) -->
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<!-- Mobile drawer -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio" onclick="closeMenu()">Inicio</a>
+  <a href="#servicios" onclick="closeMenu()">Servicios</a>
+  <a href="#innovacion" onclick="closeMenu()">Innovacion</a>
+  <a href="#planes" onclick="closeMenu()">Planes</a>
+  <a href="#portal" onclick="closeMenu()">Portal</a>
+  <a href="#contacto" onclick="closeMenu()">Contacto</a>
+  <a href="#" class="m-nav-btn" onclick="closeMenu();abrirPortal();return false;">Acceder al Portal</a>
+</div>
+
+<!-- ── HERO ── -->
 <section id="inicio">
   <div class="hero-inner">
     <div>
@@ -248,6 +381,7 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
   </div>
 </section>
 
+<!-- ── PROBLEMA ── -->
 <section id="problema">
   <div class="section-inner">
     <div class="two-col">
@@ -256,11 +390,11 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
         <h2 class="section-title">Tu empresa turistica merece finanzas en orden</h2>
         <p class="section-desc">Mas del 65% de los hoteles, restaurantes y agencias de viajes en RD operan sin contabilidad formal. Esto genera multas, perdidas invisibles y decisiones sin base real.</p>
         <ul class="check-list">
-          <li><span class="chk">v</span>Incumplimientos con la DGII que generan multas y recargos</li>
-          <li><span class="chk">v</span>Imposibilidad de acceder a prestamos por falta de estados financieros</li>
-          <li><span class="chk">v</span>Perdidas por falta de control de costos en temporada baja</li>
-          <li><span class="chk">v</span>Decisiones gerenciales basadas en intuicion, no en datos reales</li>
-          <li><span class="chk">v</span>Empresas que cierran por problemas de liquidez prevenibles</li>
+          <li><span class="chk">✓</span>Incumplimientos con la DGII que generan multas y recargos</li>
+          <li><span class="chk">✓</span>Imposibilidad de acceder a prestamos por falta de estados financieros</li>
+          <li><span class="chk">✓</span>Perdidas por falta de control de costos en temporada baja</li>
+          <li><span class="chk">✓</span>Decisiones gerenciales basadas en intuicion, no en datos reales</li>
+          <li><span class="chk">✓</span>Empresas que cierran por problemas de liquidez prevenibles</li>
         </ul>
       </div>
       <div>
@@ -273,6 +407,7 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
   </div>
 </section>
 
+<!-- ── SERVICIOS ── -->
 <section id="servicios">
   <div class="section-inner">
     <div class="services-header">
@@ -280,209 +415,90 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
       <h2 class="section-title">Servicios especializados para el turismo</h2>
     </div>
     <div class="grid-3">
-      <div class="card"><div class="card-icon">&#128202;</div><h3 class="card-title">Contabilidad General</h3><p class="card-desc">Registro y clasificacion de transacciones contables mensuales adaptadas a operaciones turisticas.</p><span class="card-tag">Mensual</span></div>
-      <div class="card"><div class="card-icon">&#127963;</div><h3 class="card-title">Declaraciones DGII</h3><p class="card-desc">Preparacion y presentacion de IT-1, IR-2, ITBIS y retenciones. Cumplimiento fiscal garantizado.</p><span class="card-tag">Mensual / Anual</span></div>
-      <div class="card"><div class="card-icon">&#128269;</div><h3 class="card-title">Auditoria Interna</h3><p class="card-desc">Revision de procesos contables y control interno para detectar irregularidades.</p><span class="card-tag">Trimestral</span></div>
-      <div class="card"><div class="card-icon">&#128203;</div><h3 class="card-title">Estados Financieros</h3><p class="card-desc">Balance general, estado de resultados y flujo de caja mensuales para decisiones reales.</p><span class="card-tag">Mensual</span></div>
-      <div class="card"><div class="card-icon">&#128188;</div><h3 class="card-title">Nomina y TSS</h3><p class="card-desc">Calculo de salarios, AFP, ARS y retenciones conforme a la legislacion dominicana.</p><span class="card-tag">Mensual</span></div>
-      <div class="card"><div class="card-icon">&#127891;</div><h3 class="card-title">Talleres Financieros</h3><p class="card-desc">Capacitacion gratuita para propietarios y empleados del sector en gestion contable.</p><span class="card-tag">Trimestral</span></div>
+      <div class="card"><div class="card-icon">📊</div><h3 class="card-title">Contabilidad General</h3><p class="card-desc">Registro y clasificacion de transacciones contables mensuales adaptadas a operaciones turisticas.</p><span class="card-tag">Mensual</span></div>
+      <div class="card"><div class="card-icon">🏛️</div><h3 class="card-title">Declaraciones DGII</h3><p class="card-desc">Preparacion y presentacion de IT-1, IR-2, ITBIS y retenciones. Cumplimiento fiscal garantizado.</p><span class="card-tag">Mensual / Anual</span></div>
+      <div class="card"><div class="card-icon">🔍</div><h3 class="card-title">Auditoria Interna</h3><p class="card-desc">Revision de procesos contables y control interno para detectar irregularidades.</p><span class="card-tag">Trimestral</span></div>
+      <div class="card"><div class="card-icon">📋</div><h3 class="card-title">Estados Financieros</h3><p class="card-desc">Balance general, estado de resultados y flujo de caja mensuales para decisiones reales.</p><span class="card-tag">Mensual</span></div>
+      <div class="card"><div class="card-icon">💼</div><h3 class="card-title">Nomina y TSS</h3><p class="card-desc">Calculo de salarios, AFP, ARS y retenciones conforme a la legislacion dominicana.</p><span class="card-tag">Mensual</span></div>
+      <div class="card"><div class="card-icon">🎓</div><h3 class="card-title">Talleres Financieros</h3><p class="card-desc">Capacitacion gratuita para propietarios y empleados del sector en gestion contable.</p><span class="card-tag">Trimestral</span></div>
     </div>
   </div>
 </section>
-<!-- 
-================================================================================
-SECCIÓN DEL TALLER - LISTA PARA PEGAR EN TU SITIO
-================================================================================
 
-UBICACIÓN: Entre </section> de #servicios y <section id="innovacion">
-
-INSTRUCCIONES:
-1. Abre tu index.html
-2. Busca donde termina #servicios (busca: </section> después del .grid-3)
-3. Copia TODO el código de abajo (desde <!-- NUEVA SECCIÓN hasta </style>)
-4. Pégalo EXACTAMENTE en ese punto
-5. Guarda y abre en navegador
-6. ¡Listo!
-
-================================================================================
--->
-
-<!-- NUEVA SECCIÓN: TALLER DE RENTABILIDAD -->
-<section id="taller" style="background: #fff;">
+<!-- ── TALLER ── -->
+<section id="taller" style="background:#fff; border-top: 1px solid #f0ede6;">
   <div class="section-inner">
-    <!-- Header -->
     <div class="services-header">
       <span class="section-tag">Herramienta Interactiva</span>
-      <h2 class="section-title">Plataforma de <span style="color: #c9a84c;">Rentabilidad</span></h2>
-      <p class="section-desc">
-        Descubre el verdadero valor de cada plato. Calcula costos, márgenes de ganancia y optimiza tu negocio.
-      </p>
+      <h2 class="section-title">Plataforma de <span style="color:#c9a84c;">Rentabilidad</span></h2>
+      <p class="section-desc">Descubre el verdadero valor de cada plato. Calcula costos, margenes de ganancia y optimiza tu negocio.</p>
     </div>
-
-    <!-- Características (3 tarjetas) -->
-    <div class="grid-3" style="margin-bottom: 60px;">
-      <div class="card">
-        <div style="font-size: 40px; margin-bottom: 15px;">📊</div>
-        <h3 class="card-title">Calculadora Interactiva</h3>
-        <p class="card-desc">Calcula rentabilidad por plato en segundos con nuestra herramienta intuitiva.</p>
-      </div>
-
-      <div class="card">
-        <div style="font-size: 40px; margin-bottom: 15px;">💡</div>
-        <h3 class="card-title">Análisis Detallado</h3>
-        <p class="card-desc">Desglose completo de costos: ingredientes, mano de obra y gastos generales.</p>
-      </div>
-
-      <div class="card">
-        <div style="font-size: 40px; margin-bottom: 15px;">🎯</div>
-        <h3 class="card-title">Decisiones Estratégicas</h3>
-        <p class="card-desc">Toma decisiones informadas basadas en datos reales de tu negocio.</p>
-      </div>
+    <div class="grid-3" style="margin-bottom: 50px;">
+      <div class="card"><div style="font-size:36px;margin-bottom:12px;">📊</div><h3 class="card-title">Calculadora Interactiva</h3><p class="card-desc">Calcula rentabilidad por plato en segundos con nuestra herramienta intuitiva.</p></div>
+      <div class="card"><div style="font-size:36px;margin-bottom:12px;">💡</div><h3 class="card-title">Analisis Detallado</h3><p class="card-desc">Desglose completo de costos: ingredientes, mano de obra y gastos generales.</p></div>
+      <div class="card"><div style="font-size:36px;margin-bottom:12px;">🎯</div><h3 class="card-title">Decisiones Estrategicas</h3><p class="card-desc">Toma decisiones informadas basadas en datos reales de tu negocio.</p></div>
     </div>
-
-    <!-- Sección Principal (2 columnas) -->
-    <div class="two-col" style="background: #f5f0e8; border-radius: 14px; padding: 50px; margin-top: 40px;">
-      <!-- Izquierda: Contenido -->
+    <div class="two-col" style="background:#f5f0e8;border-radius:14px;padding:40px;gap:40px;">
       <div>
-        <h3 style="font-size: 32px; color: #0d1b2a; margin-bottom: 20px; line-height: 1.3;">
-          Optimiza tus <span style="color: #c9a84c;">Ganancias</span>
-        </h3>
-        
-        <p style="font-family: Arial, sans-serif; font-size: 15px; color: #6b7280; line-height: 1.8; margin-bottom: 20px;">
-          Muchos restaurantes venden mucho pero no ven el dinero al final del mes. <strong>El problema: no conocen el costo real de cada plato.</strong>
-        </p>
-
-        <p style="font-family: Arial, sans-serif; font-size: 15px; color: #6b7280; line-height: 1.8; margin-bottom: 20px;">
-          Nuestra plataforma te enseña a:
-        </p>
-
-        <!-- Lista de beneficios -->
-        <ul class="check-list" style="margin-bottom: 30px;">
-          <li><span class="chk">✓</span> Calcular el costo real de cada ingrediente y plato</li>
-          <li><span class="chk">✓</span> Determinar márgenes de ganancia óptimos</li>
-          <li><span class="chk">✓</span> Identificar platos rentables vs. platos problemáticos</li>
-          <li><span class="chk">✓</span> Reducir costos sin comprometer la calidad</li>
-          <li><span class="chk">✓</span> Negociar mejor con proveedores</li>
+        <h3 style="font-size:28px;color:#0d1b2a;margin-bottom:16px;line-height:1.3;">Optimiza tus <span style="color:#c9a84c;">Ganancias</span></h3>
+        <p style="font-family:Arial,sans-serif;font-size:15px;color:#6b7280;line-height:1.8;margin-bottom:16px;">Muchos restaurantes venden mucho pero no ven el dinero al final del mes. <strong>El problema: no conocen el costo real de cada plato.</strong></p>
+        <ul class="check-list" style="margin-bottom:28px;">
+          <li><span class="chk">✓</span>Calcular el costo real de cada ingrediente y plato</li>
+          <li><span class="chk">✓</span>Determinar margenes de ganancia optimos</li>
+          <li><span class="chk">✓</span>Identificar platos rentables vs. platos problematicos</li>
+          <li><span class="chk">✓</span>Reducir costos sin comprometer la calidad</li>
+          <li><span class="chk">✓</span>Negociar mejor con proveedores</li>
         </ul>
-
-        <!-- Botones -->
-        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-          <a href="https://conturworkshop-zbvrpjpm.manus.space" class="btn-gold" target="_blank" style="text-decoration: none;">
-            Ir a la Plataforma →
-          </a>
-          <a href="#contacto" class="btn-outline" style="text-decoration: none;">
-            Más Información
-          </a>
-        </div>
+        <a href="https://conturworkshop-zbvrpjpm.manus.space" class="btn-gold" target="_blank" style="margin-right:12px;">Ir a la Plataforma →</a>
+        <a href="#contacto" class="btn-outline" style="border-color:#0d1b2a;color:#0d1b2a;">Mas informacion</a>
       </div>
-
-      <!-- Derecha: Caja decorativa -->
-      <div style="display: flex; align-items: center; justify-content: center;">
-        <div style="
-          background: linear-gradient(135deg, rgba(201, 168, 76, 0.15) 0%, rgba(201, 168, 76, 0.05) 100%);
-          border: 2px dashed rgba(201, 168, 76, 0.3);
-          border-radius: 12px;
-          padding: 50px 30px;
-          text-align: center;
-          min-height: 300px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        ">
-          <div style="font-size: 70px; margin-bottom: 20px; animation: bounce 2s ease-in-out infinite;">📈</div>
-          <div style="font-family: Georgia, serif; font-size: 20px; color: #c9a84c; font-weight: bold; margin-bottom: 10px;">
-            Rentabilidad en Tiempo Real
-          </div>
-          <div style="font-family: Arial, sans-serif; font-size: 14px; color: #6b7280;">
-            Calcula, analiza y optimiza tu menú
-          </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <div style="background:rgba(201,168,76,0.12);border:2px dashed rgba(201,168,76,0.35);border-radius:12px;padding:40px 28px;text-align:center;width:100%;">
+          <div style="font-size:64px;margin-bottom:16px;animation:bounce 2s ease-in-out infinite;">📈</div>
+          <div style="font-family:Georgia,serif;font-size:18px;color:#c9a84c;font-weight:bold;margin-bottom:8px;">Rentabilidad en Tiempo Real</div>
+          <div style="font-family:Arial,sans-serif;font-size:13px;color:#6b7280;">Calcula, analiza y optimiza tu menu</div>
         </div>
       </div>
     </div>
-
-    <!-- Estadística -->
-    <div style="margin-top: 60px; text-align: center;">
-      <div class="big-stat" style="max-width: 600px; margin: 0 auto;">
+    <div style="margin-top:50px;text-align:center;">
+      <div class="big-stat" style="max-width:560px;margin:0 auto;">
         <span class="big-num">+35%</span>
-        <div class="big-txt">
-          Aumento promedio en rentabilidad de restaurantes que usan nuestra plataforma
-        </div>
+        <div class="big-txt">Aumento promedio en rentabilidad de restaurantes que usan nuestra plataforma</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ESTILOS ADICIONALES (agregar al final de tu bloque <style> principal) -->
-<style>
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .two-col {
-      grid-template-columns: 1fr !important;
-      gap: 30px !important;
-    }
-  }
-</style>
-
-<!-- 
-================================================================================
-LISTO. Ahora tu sitio tiene:
-
-✅ Sección de Taller integrada
-✅ 3 tarjetas de características
-✅ Contenido con beneficios
-✅ Botón "Ir a la Plataforma" que lleva a: https://conturworkshop-zbvrpjpm.manus.space
-✅ Botón "Más Información" que lleva a #contacto
-✅ Estadística de impacto
-✅ Diseño responsive
-
-PRÓXIMOS PASOS:
-1. Prueba en navegador (desktop y móvil)
-2. Cuando tengas tu dominio real, cambia la URL
-3. Configura Google Analytics para rastrear conversiones
-4. ¡Comparte con tu equipo!
-
-¿Preguntas? Avísame y lo ajustamos.
-================================================================================
--->
-
+<!-- ── INNOVACION ── -->
 <section id="innovacion">
   <div class="section-inner">
     <div class="innov-header">
       <span class="section-tag">Lo que nos hace unicos</span>
-      <h2 class="section-title" style="color:#fff;">4 innovaciones que ninguna asesoria tiene</h2>
-      <p class="section-desc" style="color:rgba(255,255,255,0.6);">Contur no es solo una firma contable. Es un agente de cambio en el ecosistema turistico dominicano.</p>
+      <h2 class="section-title">4 innovaciones que ninguna asesoria tiene</h2>
+      <p class="section-desc">Contur no es solo una firma contable. Es un agente de cambio en el ecosistema turistico dominicano.</p>
     </div>
     <div class="grid-2">
       <div class="innov-card">
-        <div class="innov-icon">&#128241;</div>
+        <div class="innov-icon">📱</div>
         <h3 class="innov-title">Panel Financiero Digital</h3>
         <p class="innov-desc">Plataforma exclusiva donde los clientes ven ingresos, gastos y alertas fiscales de la DGII en tiempo real desde cualquier dispositivo. Reportes automaticos en PDF incluidos.</p>
         <div class="innov-impact">Reduce la informalidad empresarial en RD</div>
       </div>
       <div class="innov-card">
-        <div class="innov-icon">&#127891;</div>
+        <div class="innov-icon">🎓</div>
         <h3 class="innov-title">Academia Contur</h3>
         <p class="innov-desc">Talleres GRATUITOS trimestrales para pequenas empresas turisticas: contabilidad basica, pago de impuestos, manejo de temporada baja y acceso a financiamiento bancario.</p>
         <div class="innov-impact">Reduce quiebras por desconocimiento financiero</div>
       </div>
       <div class="innov-card">
-        <div class="innov-icon">&#129309;</div>
+        <div class="innov-icon">🤝</div>
         <h3 class="innov-title">Formaliza tu Negocio</h3>
         <p class="innov-desc">Guiamos a negocios informales en todo el proceso: registro en Camara de Comercio, RNC en la DGII, TSS y licencias del Ministerio de Turismo. Todo en un solo lugar.</p>
         <div class="innov-impact">Mas empresas legales, mas ingresos para el pais</div>
       </div>
       <div class="innov-card featured">
-        <div class="innov-icon">&#128202; &nbsp;<span class="innov-badge">INNOVACION EXCLUSIVA</span></div>
-        <h3 class="innov-title">Indice Contur &#128293;</h3>
+        <div class="innov-icon">📊 &nbsp;<span class="innov-badge">INNOVACION EXCLUSIVA</span></div>
+        <h3 class="innov-title">Indice Contur 🔥</h3>
         <p class="innov-desc">El primer indice de salud financiera del sector turistico de Republica Dominicana. Publicacion anual que mide rentabilidad, liquidez y cumplimiento fiscal de las PyMEs turisticas por provincia. Util para empresas, bancos y el gobierno.</p>
         <div class="innov-impact">Posiciona a Contur como la autoridad del turismo dominicano</div>
       </div>
@@ -490,6 +506,7 @@ PRÓXIMOS PASOS:
   </div>
 </section>
 
+<!-- ── PLANES ── -->
 <section id="planes">
   <div class="section-inner">
     <div class="planes-header">
@@ -544,6 +561,7 @@ PRÓXIMOS PASOS:
   </div>
 </section>
 
+<!-- ── PORTAL ── -->
 <section id="portal">
   <div class="section-inner">
     <div class="two-col">
@@ -570,17 +588,18 @@ PRÓXIMOS PASOS:
         <h2 class="section-title">Tu contabilidad, siempre a la mano</h2>
         <p class="section-desc">Accede a todos tus documentos, reportes y vencimientos fiscales desde cualquier dispositivo, en tiempo real.</p>
         <div class="portal-features">
-          <div class="pf"><div class="pf-icon">&#128193;</div><div><div class="pf-title">Documentos en la nube</div><p class="pf-desc">Estados financieros y declaraciones organizadas y disponibles en cualquier momento.</p></div></div>
-          <div class="pf"><div class="pf-icon">&#128276;</div><div><div class="pf-title">Alertas de vencimientos DGII</div><p class="pf-desc">Notificaciones automaticas de fechas limite para que nunca pagues multas por olvido.</p></div></div>
-          <div class="pf"><div class="pf-icon">&#128172;</div><div><div class="pf-title">Chat directo con tu CPA</div><p class="pf-desc">Comunicacion directa con el contador asignado a tu empresa, sin intermediarios.</p></div></div>
+          <div class="pf"><div class="pf-icon">📁</div><div><div class="pf-title">Documentos en la nube</div><p class="pf-desc">Estados financieros y declaraciones organizadas y disponibles en cualquier momento.</p></div></div>
+          <div class="pf"><div class="pf-icon">🔔</div><div><div class="pf-title">Alertas de vencimientos DGII</div><p class="pf-desc">Notificaciones automaticas de fechas limite para que nunca pagues multas por olvido.</p></div></div>
+          <div class="pf"><div class="pf-icon">💬</div><div><div class="pf-title">Chat directo con tu CPA</div><p class="pf-desc">Comunicacion directa con el contador asignado a tu empresa, sin intermediarios.</p></div></div>
         </div>
         <br>
-        <a href="contur-portal.html" class="btn-gold">Acceder al portal</a>
+        <a href="#" class="btn-gold" onclick="abrirPortal();return false;">Acceder al portal</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── CONTACTO ── -->
 <section id="contacto">
   <div class="section-inner">
     <div class="two-col">
@@ -603,42 +622,96 @@ PRÓXIMOS PASOS:
         <h2 class="section-title">Estamos en Santo Domingo</h2>
         <p class="section-desc">Primera consulta sin costo. Evaluamos tu situacion contable y te decimos exactamente que necesitas.</p>
         <div class="ci-list">
-          <div class="ci"><div class="ci-icon">&#128205;</div><div><div class="ci-label">DIRECCION</div><div class="ci-val"Haras Nacionales, Santo Domingo, R.D.</div></div></div>
-          <div class="ci"><div class="ci-icon">&#128222;</div><div><div class="ci-label">TELEFONO</div><div class="ci-val">809-000-0000</div></div></div>
-          <div class="ci"><div class="ci-icon">&#9993;</div><div><div class="ci-label">CORREO</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0c9cec6cfe0c3cfced4d5d28ec3cfcd8ec4cf">[email&#160;protected]</a></div></div></div>
-          <div class="ci"><div class="ci-icon">&#128336;</div><div><div class="ci-label">HORARIO</div><div class="ci-val">Lunes a viernes: 8:00 AM - 6:00 PM</div></div></div>
+          <div class="ci">
+            <div class="ci-icon">📍</div>
+            <div><div class="ci-label">DIRECCION</div><div class="ci-val">Haras Nacionales, Santo Domingo, R.D.</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">📞</div>
+            <div><div class="ci-label">TELEFONO</div><div class="ci-val">809-000-0000</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">✉️</div>
+            <div><div class="ci-label">CORREO</div><div class="ci-val">info@contur.com.do</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">🕐</div>
+            <div><div class="ci-label">HORARIO</div><div class="ci-val">Lunes a viernes: 8:00 AM - 6:00 PM</div></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
     <div>
       <div class="footer-logo">CON<span>TUR</span></div>
       <div class="footer-sub">Consultoria Contable para el Sector Turistico</div>
-      <div class="footer-sub" style="margin-top:4px;">2026 Contur S.R.L. - Instituto Politecnico Manuel Aurelio Tavarez Justo</div>
+      <div class="footer-sub" style="margin-top:4px;">© 2026 Contur S.R.L. — Instituto Politecnico Manuel Aurelio Tavarez Justo</div>
     </div>
     <div class="footer-links">
-      <a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#innovacion">Innovacion</a><a href="#planes">Planes</a><a href="#portal">Portal</a><a href="#contacto">Contacto</a>
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#innovacion">Innovacion</a>
+      <a href="#planes">Planes</a>
+      <a href="#portal">Portal</a>
+      <a href="#contacto">Contacto</a>
     </div>
   </div>
 </footer>
 
+<!-- ── MODAL PORTAL ── -->
 <div class="modal-bg" id="modalPortal">
   <div class="modal">
-    <button class="modal-close" onclick="cerrarPortal()">X</button>
+    <button class="modal-close" onclick="cerrarPortal()">✕</button>
     <div class="modal-logo">CON<span>TUR</span></div>
     <p class="modal-sub">Portal de Clientes</p>
     <div class="modal-note">Acceso exclusivo para clientes Contur</div>
     <div class="form-group"><label class="form-label">Correo electronico</label><input type="email" class="form-input" placeholder="empresa@correo.com"></div>
-    <div class="form-group"><label class="form-label">Contrasena</label><input type="password" class="form-input" placeholder="********"></div>
+    <div class="form-group"><label class="form-label">Contrasena</label><input type="password" class="form-input" placeholder="••••••••"></div>
     <button class="btn-gold" style="width:100%;margin-top:8px;" onclick="alert('Portal proximamente disponible para clientes.')">Iniciar sesion</button>
-    <p style="text-align:center;margin-top:14px;font-family:Arial,sans-serif;font-size:13px;color:#6b7280;">No eres cliente? <a href="#contacto" onclick="cerrarPortal()" style="color:#1a5276;font-weight:bold;">Contactanos</a></p>
+    <p style="text-align:center;margin-top:14px;font-family:Arial,sans-serif;font-size:13px;color:#6b7280;">
+      No eres cliente? <a href="#contacto" onclick="cerrarPortal()" style="color:#1a5276;font-weight:bold;">Contactanos</a>
+    </p>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+function abrirPortal() {
+  document.getElementById('modalPortal').classList.add('open');
+}
+function cerrarPortal() {
+  document.getElementById('modalPortal').classList.remove('open');
+}
+document.getElementById('modalPortal').addEventListener('click', function(e) {
+  if (e.target === this) cerrarPortal();
+});
 
-function
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      closeMenu();
+      const offset = 65;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
