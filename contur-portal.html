@@ -32,310 +32,90 @@
   --shadow: 0 4px 16px rgba(0,0,0,0.08);
   --shadow-lg: 0 12px 40px rgba(0,0,0,0.14);
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--surface);
-  color: var(--text-primary);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ─── SCROLLBAR ─── */
+body { font-family: 'DM Sans', sans-serif; background: var(--surface); color: var(--text-primary); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
-/* ═══════════════════════════════════════
-   LOGIN
-═══════════════════════════════════════ */
-#login-screen {
-  min-height: 100vh;
-  background: var(--navy);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-#login-screen::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 70% at 65% 45%, rgba(201,168,76,0.08) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(26,82,118,0.3) 0%, transparent 60%);
-}
-/* decorative lines */
-#login-screen::after {
-  content: '';
-  position: absolute;
-  top: -40%;
-  right: -10%;
-  width: 600px;
-  height: 600px;
-  border: 1px solid rgba(201,168,76,0.06);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.login-box {
-  background: var(--white);
-  border-radius: 20px;
-  padding: 48px 44px;
-  width: 420px;
-  max-width: calc(100vw - 32px);
-  position: relative;
-  z-index: 2;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.05);
-  animation: loginReveal 0.5s ease both;
-}
-
-@keyframes loginReveal {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.login-logo {
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 34px;
-  font-weight: 700;
-  color: var(--navy);
-  letter-spacing: 4px;
-  margin-bottom: 4px;
-}
+/* LOGIN */
+#login-screen { min-height: 100vh; background: var(--navy); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+#login-screen::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 65% 45%, rgba(201,168,76,0.08) 0%, transparent 65%), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(26,82,118,0.3) 0%, transparent 60%); }
+.login-box { background: var(--white); border-radius: 20px; padding: 48px 44px; width: 420px; max-width: calc(100vw - 32px); position: relative; z-index: 2; box-shadow: 0 40px 100px rgba(0,0,0,0.35); animation: loginReveal 0.5s ease both; }
+@keyframes loginReveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.login-logo { text-align: center; font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; color: var(--navy); letter-spacing: 4px; margin-bottom: 4px; }
 .login-logo span { color: var(--gold); }
-.login-sub { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-bottom: 32px; letter-spacing: 0.3px; }
-
-.login-divider { height: 1px; background: var(--border); margin: 24px 0; }
-
+.login-sub { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-bottom: 32px; }
 .form-label { display: block; font-size: 11.5px; font-weight: 600; color: var(--navy); margin-bottom: 7px; letter-spacing: 0.4px; }
-.form-input {
-  width: 100%; padding: 12px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-size: 14px; color: var(--text-primary);
-  outline: none; margin-bottom: 16px;
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background: #fafafa;
-}
-.form-input:focus {
-  border-color: var(--blue);
-  background: var(--white);
-  box-shadow: 0 0 0 3px rgba(26,82,118,0.09);
-}
-
-.btn-login {
-  width: 100%; padding: 14px;
-  background: var(--navy);
-  color: var(--gold);
-  border: none; border-radius: 8px;
-  font-size: 14px; font-weight: 600;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  letter-spacing: 0.8px;
-  transition: background 0.2s, transform 0.1s;
-}
+.form-input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; color: var(--text-primary); outline: none; margin-bottom: 16px; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s, box-shadow 0.2s; background: #fafafa; }
+.form-input:focus { border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(26,82,118,0.09); }
+.btn-login { width: 100%; padding: 14px; background: var(--navy); color: var(--gold); border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; letter-spacing: 0.8px; transition: background 0.2s, transform 0.1s; }
 .btn-login:hover { background: #1a2e44; }
 .btn-login:active { transform: scale(0.99); }
-
 .login-hint { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 16px; }
-.demo-badge {
-  background: #f0f9ff; border: 1px solid #bae6fd;
-  border-radius: 8px; padding: 10px 14px;
-  font-size: 12px; color: #0369a1;
-  margin-bottom: 20px; text-align: center;
-}
+.demo-badge { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #0369a1; margin-bottom: 20px; text-align: center; }
+.back-link { display: block; text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-muted); text-decoration: none; }
+.back-link:hover { color: var(--navy); }
 
-/* ═══════════════════════════════════════
-   PORTAL
-═══════════════════════════════════════ */
+/* PORTAL */
 #portal-screen { display: none; min-height: 100vh; }
 #portal-screen.active { display: block; }
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; backdrop-filter: blur(2px); }
 
-/* ─── MOBILE OVERLAY ─── */
-.sidebar-overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 99;
-  backdrop-filter: blur(2px);
-}
-
-/* ─── SIDEBAR ─── */
-.sidebar {
-  width: var(--sidebar-w);
-  background: var(--navy);
-  display: flex; flex-direction: column;
-  min-height: 100vh;
-  position: fixed; top: 0; left: 0; bottom: 0;
-  border-right: 1px solid rgba(201,168,76,0.1);
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-  z-index: 100;
-}
-
+/* SIDEBAR */
+.sidebar { width: var(--sidebar-w); background: var(--navy); display: flex; flex-direction: column; min-height: 100vh; position: fixed; top: 0; left: 0; bottom: 0; border-right: 1px solid rgba(201,168,76,0.1); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); z-index: 100; }
 .sidebar-logo { padding: 24px 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.sidebar-logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px; font-weight: 700;
-  color: var(--white); letter-spacing: 3px;
-}
+.sidebar-logo-text { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--white); letter-spacing: 3px; }
 .sidebar-logo-text span { color: var(--gold); }
 .sidebar-client { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 5px; font-weight: 300; }
-
 .sidebar-nav { flex: 1; padding: 18px 12px; overflow-y: auto; }
-.nav-section-title {
-  font-size: 9.5px; font-weight: 600;
-  color: rgba(255,255,255,0.2);
-  letter-spacing: 1.8px; text-transform: uppercase;
-  padding: 10px 12px 5px; margin-top: 10px;
-}
-.nav-item {
-  display: flex; align-items: center; gap: 11px;
-  padding: 10px 12px; border-radius: 9px;
-  cursor: pointer; font-size: 13.5px;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 2px;
-  transition: all 0.18s;
-  position: relative;
-  font-weight: 400;
-}
-.nav-item:hover {
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.9);
-}
-.nav-item.active {
-  background: rgba(201,168,76,0.13);
-  color: var(--gold);
-  font-weight: 500;
-}
-.nav-item.active::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 6px; bottom: 6px;
-  width: 3px;
-  background: var(--gold);
-  border-radius: 0 3px 3px 0;
-}
+.nav-section-title { font-size: 9.5px; font-weight: 600; color: rgba(255,255,255,0.2); letter-spacing: 1.8px; text-transform: uppercase; padding: 10px 12px 5px; margin-top: 10px; }
+.nav-item { display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 9px; cursor: pointer; font-size: 13.5px; color: rgba(255,255,255,0.55); margin-bottom: 2px; transition: all 0.18s; position: relative; font-weight: 400; }
+.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+.nav-item.active { background: rgba(201,168,76,0.13); color: var(--gold); font-weight: 500; }
+.nav-item.active::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; background: var(--gold); border-radius: 0 3px 3px 0; }
 .nav-icon { font-size: 16px; width: 22px; text-align: center; flex-shrink: 0; opacity: 0.85; }
-.nav-badge {
-  background: var(--gold); color: var(--navy);
-  font-size: 10px; font-weight: 700;
-  padding: 2px 7px; border-radius: 10px;
-  margin-left: auto;
-}
-
+.nav-badge { background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
 .sidebar-footer { padding: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
 .sidebar-user { display: flex; align-items: center; gap: 10px; }
-.user-avatar {
-  width: 36px; height: 36px;
-  background: var(--gold); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700; color: var(--navy);
-  flex-shrink: 0;
-}
+.user-avatar { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
 .user-name { font-size: 12.5px; color: rgba(255,255,255,0.85); font-weight: 500; }
 .user-role { font-size: 10.5px; color: rgba(255,255,255,0.3); margin-top: 1px; }
-.btn-logout {
-  margin-left: auto; background: none; border: none;
-  color: rgba(255,255,255,0.25); cursor: pointer; font-size: 17px;
-  transition: color 0.2s; padding: 4px;
-}
+.btn-logout { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.25); cursor: pointer; font-size: 17px; transition: color 0.2s; padding: 4px; }
 .btn-logout:hover { color: var(--gold); }
 
-/* ─── MAIN ─── */
+/* MAIN */
 .main { margin-left: var(--sidebar-w); display: flex; flex-direction: column; min-height: 100vh; }
-
-/* ─── TOPBAR ─── */
-.topbar {
-  background: var(--white);
-  padding: 0 28px;
-  height: var(--topbar-h);
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; z-index: 10;
-  box-shadow: var(--shadow-sm);
-}
+.topbar { background: var(--white); padding: 0 28px; height: var(--topbar-h); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow-sm); }
 .topbar-left { display: flex; align-items: center; gap: 14px; }
-.menu-btn {
-  display: none;
-  background: none; border: none;
-  font-size: 20px; cursor: pointer;
-  color: var(--text-secondary); padding: 4px;
-  border-radius: 6px;
-}
+.menu-btn { display: none; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-secondary); padding: 4px; border-radius: 6px; }
 .menu-btn:hover { background: var(--surface); }
-.page-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 19px; color: var(--navy); font-weight: 600;
-}
+.page-title { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--navy); font-weight: 600; }
 .topbar-right { display: flex; align-items: center; gap: 12px; }
-.notif-btn {
-  background: var(--surface); border: none;
-  width: 38px; height: 38px; border-radius: 9px;
-  cursor: pointer; font-size: 16px;
-  position: relative; transition: background 0.2s;
-}
+.notif-btn { background: var(--surface); border: none; width: 38px; height: 38px; border-radius: 9px; cursor: pointer; font-size: 16px; position: relative; transition: background 0.2s; }
 .notif-btn:hover { background: var(--border); }
-.notif-dot {
-  position: absolute; top: 7px; right: 7px;
-  width: 7px; height: 7px;
-  background: #ef4444; border-radius: 50%;
-  border: 2px solid var(--surface);
-}
-.date-badge {
-  font-size: 12px; color: var(--text-muted);
-  font-weight: 300; letter-spacing: 0.2px;
-}
-
-/* ─── CONTENT ─── */
+.notif-dot { position: absolute; top: 7px; right: 7px; width: 7px; height: 7px; background: #ef4444; border-radius: 50%; border: 2px solid var(--surface); }
+.date-badge { font-size: 12px; color: var(--text-muted); font-weight: 300; }
 .content { padding: 26px 28px; flex: 1; }
 .page { display: none; animation: fadeUp 0.3s ease both; }
 .page.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── BUTTONS ─── */
-.btn-primary {
-  background: var(--navy); color: var(--gold);
-  border: none; padding: 9px 18px;
-  border-radius: 8px; font-size: 13px;
-  font-weight: 600; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: background 0.2s, transform 0.1s;
-  white-space: nowrap;
-}
+.btn-primary { background: var(--navy); color: var(--gold); border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s, transform 0.1s; white-space: nowrap; }
 .btn-primary:hover { background: var(--navy-mid); }
 .btn-primary:active { transform: scale(0.98); }
-
-.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; gap: 12px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; gap: 12px; flex-wrap: wrap; }
 .section-header h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); }
 
-/* ═══════════════════════════════════════
-   KPI CARDS
-═══════════════════════════════════════ */
+/* KPIs */
 .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
-
-.kpi {
-  background: var(--white); border-radius: var(--radius);
-  padding: 20px 22px; border: 1px solid var(--border);
-  position: relative; overflow: hidden;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
+.kpi { background: var(--white); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--border); position: relative; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
 .kpi:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
 .kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
 .kpi.gold::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
 .kpi.blue::before { background: linear-gradient(90deg, #1a5276, #2e86c1); }
 .kpi.green::before { background: linear-gradient(90deg, #16a34a, #4ade80); }
 .kpi.red::before  { background: linear-gradient(90deg, #dc2626, #f87171); }
-
 .kpi-label { font-size: 10.5px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.7px; text-transform: uppercase; margin-bottom: 10px; }
 .kpi-value { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
 .kpi-sub { font-size: 11px; color: var(--text-muted); }
@@ -343,20 +123,16 @@ body {
 .kpi-change.up { color: var(--green); }
 .kpi-change.down { color: var(--red); }
 
-/* ═══════════════════════════════════════
-   DASHBOARD GRID
-═══════════════════════════════════════ */
+/* DASH GRID */
 .dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px; }
 .card-box { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
 .card-header { padding: 18px 22px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
 .card-title-sm { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--navy); font-weight: 600; }
 .card-body { padding: 20px 22px; }
-
-/* ─── Chart ─── */
 .chart-bars { display: flex; align-items: flex-end; gap: 10px; height: 140px; }
 .bar-group { flex: 1; display: flex; gap: 4px; align-items: flex-end; }
-.bar { border-radius: 4px 4px 0 0; transition: opacity 0.2s, transform 0.2s; cursor: default; }
-.bar:hover { opacity: 0.75; transform: scaleY(1.02); transform-origin: bottom; }
+.bar { border-radius: 4px 4px 0 0; transition: opacity 0.2s; cursor: default; }
+.bar:hover { opacity: 0.75; }
 .bar.income { background: linear-gradient(180deg, #2e86c1, var(--blue)); }
 .bar.expense { background: linear-gradient(180deg, var(--gold-light), var(--gold)); }
 .chart-labels { display: flex; gap: 10px; margin-top: 9px; }
@@ -364,8 +140,6 @@ body {
 .chart-legend { display: flex; gap: 18px; margin-top: 14px; }
 .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-secondary); }
 .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
-
-/* ─── Alerts ─── */
 .alert-list { display: flex; flex-direction: column; gap: 10px; }
 .alert-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 9px; }
 .alert-item.danger  { background: #fef2f2; border: 1px solid #fecaca; }
@@ -377,87 +151,44 @@ body {
 .alert-item.info    .alert-dot { background: #2563eb; }
 .alert-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
 .alert-desc  { font-size: 11.5px; color: var(--text-secondary); line-height: 1.4; }
-
-/* ─── Table ─── */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
 .recent-table { width: 100%; border-collapse: collapse; }
-.recent-table th {
-  font-size: 10.5px; color: var(--text-muted);
-  font-weight: 600; letter-spacing: 0.6px;
-  text-transform: uppercase; padding: 8px 0;
-  border-bottom: 1px solid var(--border-light); text-align: left;
-}
-.recent-table td {
-  padding: 12px 0; border-bottom: 1px solid var(--border-light);
-  font-size: 13px; color: #374151; vertical-align: middle;
-}
+.recent-table th { font-size: 10.5px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; padding: 8px 0; border-bottom: 1px solid var(--border-light); text-align: left; }
+.recent-table td { padding: 12px 0; border-bottom: 1px solid var(--border-light); font-size: 13px; color: #374151; vertical-align: middle; }
 .recent-table tr:last-child td { border-bottom: none; }
-.recent-table tbody tr { transition: background 0.15s; }
 .recent-table tbody tr:hover td { background: var(--surface); }
-
-.status-badge {
-  display: inline-block; padding: 3px 11px;
-  border-radius: 20px; font-size: 11px; font-weight: 600;
-}
+.status-badge { display: inline-block; padding: 3px 11px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 .status-badge.enviada   { background: #dcfce7; color: #15803d; }
 .status-badge.pendiente { background: #fef9c3; color: #b45309; }
 .status-badge.proceso   { background: #dbeafe; color: #1d4ed8; }
 .status-badge.vencida   { background: #fee2e2; color: #b91c1c; }
 
-/* ═══════════════════════════════════════
-   DOCUMENTOS
-═══════════════════════════════════════ */
+/* DOCUMENTOS */
 .doc-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.filter-btn {
-  padding: 7px 16px; border-radius: 20px; font-size: 13px;
-  cursor: pointer; border: 1.5px solid var(--border);
-  background: var(--white); color: var(--text-secondary);
-  font-family: 'DM Sans', sans-serif; font-weight: 400;
-  transition: all 0.18s;
-}
+.filter-btn { padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1.5px solid var(--border); background: var(--white); color: var(--text-secondary); font-family: 'DM Sans', sans-serif; transition: all 0.18s; }
 .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
 .filter-btn.active { background: var(--navy); color: var(--gold); border-color: var(--navy); font-weight: 500; }
-
 .doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.doc-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px;
-  display: flex; flex-direction: column; gap: 10px;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
+.doc-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 10px; transition: box-shadow 0.2s, transform 0.2s; }
 .doc-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
 .doc-icon { font-size: 26px; }
 .doc-name { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.3; }
 .doc-meta { font-size: 11px; color: var(--text-muted); }
 .doc-actions { display: flex; gap: 8px; margin-top: 4px; }
-.btn-sm {
-  padding: 7px 13px; border-radius: 7px; font-size: 12px;
-  font-weight: 600; cursor: pointer; border: none;
-  font-family: 'DM Sans', sans-serif; transition: all 0.18s;
-}
+.btn-sm { padding: 7px 13px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: all 0.18s; }
 .btn-sm.primary   { background: var(--navy); color: var(--gold); }
 .btn-sm.secondary { background: var(--surface); color: var(--text-secondary); }
 .btn-sm:hover { opacity: 0.82; transform: translateY(-1px); }
 
-/* ═══════════════════════════════════════
-   DECLARACIONES
-═══════════════════════════════════════ */
+/* DECLARACIONES */
 .decl-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
 .decl-table th { background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 0.6px; padding: 14px 18px; text-align: left; }
 .decl-table td { padding: 14px 18px; border-bottom: 1px solid var(--border-light); font-size: 13px; color: #374151; }
 .decl-table tr:last-child td { border-bottom: none; }
 .decl-table tr:hover td { background: var(--surface); }
 
-/* scroll wrapper para tabla en móvil */
-.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
-
-/* ═══════════════════════════════════════
-   CHAT
-═══════════════════════════════════════ */
-.chat-layout {
-  display: grid; grid-template-columns: 250px 1fr;
-  background: var(--white); border-radius: var(--radius);
-  border: 1px solid var(--border); overflow: hidden; height: 540px;
-}
+/* CHAT */
+.chat-layout { display: grid; grid-template-columns: 250px 1fr; background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; height: 540px; }
 .chat-sidebar { border-right: 1px solid var(--border-light); display: flex; flex-direction: column; }
 .chat-sidebar-header { padding: 16px 18px; border-bottom: 1px solid var(--border-light); font-weight: 600; font-size: 14px; color: var(--navy); }
 .chat-contact { display: flex; gap: 10px; align-items: center; padding: 12px 16px; cursor: pointer; transition: background 0.15s; }
@@ -469,11 +200,7 @@ body {
 .online-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; margin-left: auto; flex-shrink: 0; }
 .chat-main { display: flex; flex-direction: column; min-height: 0; }
 .chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; }
-.chat-messages {
-  flex: 1; padding: 20px; overflow-y: auto;
-  display: flex; flex-direction: column; gap: 14px;
-  background: var(--surface);
-}
+.chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: var(--surface); }
 .msg { max-width: 72%; }
 .msg.sent { align-self: flex-end; }
 .msg.recv { align-self: flex-start; }
@@ -483,63 +210,33 @@ body {
 .msg-time { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
 .msg.sent .msg-time { text-align: right; }
 .chat-input-area { padding: 14px 18px; border-top: 1px solid var(--border-light); display: flex; gap: 10px; align-items: center; }
-.chat-input {
-  flex: 1; padding: 10px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: 22px; font-size: 13.5px; outline: none;
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.2s;
-}
+.chat-input { flex: 1; padding: 10px 16px; border: 1.5px solid var(--border); border-radius: 22px; font-size: 13.5px; outline: none; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; }
 .chat-input:focus { border-color: var(--blue); }
-.btn-send {
-  background: var(--gold); border: none;
-  width: 38px; height: 38px; border-radius: 50%;
-  cursor: pointer; font-size: 16px;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, transform 0.1s;
-  color: var(--navy);
-}
+.btn-send { background: var(--gold); border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.1s; color: var(--navy); }
 .btn-send:hover { background: var(--gold-light); }
 .btn-send:active { transform: scale(0.93); }
 
-/* ═══════════════════════════════════════
-   PERFIL
-═══════════════════════════════════════ */
+/* PERFIL */
 .perfil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .perfil-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; }
 .perfil-card-title { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--navy); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border-light); }
 .perfil-field { margin-bottom: 16px; }
 .perfil-label { font-size: 10.5px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 5px; }
-.perfil-input {
-  width: 100%; padding: 10px 13px;
-  border: 1.5px solid var(--border); border-radius: 8px;
-  font-size: 13.5px; font-family: 'DM Sans', sans-serif;
-  outline: none; color: var(--text-primary);
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background: #fafafa;
-}
-.perfil-input:focus { border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(26,82,118,0.08); }
-
+.perfil-input { width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13.5px; font-family: 'DM Sans', sans-serif; outline: none; color: var(--text-primary); transition: border-color 0.2s; background: #fafafa; }
+.perfil-input:focus { border-color: var(--blue); background: var(--white); }
 .plan-info { background: var(--navy); border-radius: var(--radius); padding: 24px; color: var(--white); }
 .plan-info-name { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); margin-bottom: 6px; }
-.plan-info-desc { font-size: 12.5px; color: rgba(255,255,255,0.5); margin-bottom: 20px; font-weight: 300; }
-.plan-feature {
-  font-size: 13px; color: rgba(255,255,255,0.78);
-  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex; gap: 9px; align-items: center;
-}
+.plan-info-desc { font-size: 12.5px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+.plan-feature { font-size: 13px; color: rgba(255,255,255,0.78); padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 9px; align-items: center; }
 .plan-feature::before { content: "✓"; color: var(--gold); font-weight: 700; font-size: 12px; }
 .plan-feature:last-of-type { border-bottom: none; margin-bottom: 20px; }
-
 .cpa-card { display: flex; gap: 14px; align-items: center; background: var(--surface); border-radius: 10px; padding: 16px; margin-top: 16px; }
 .cpa-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--white); flex-shrink: 0; }
 .cpa-name { font-size: 14px; font-weight: 600; color: var(--navy); }
 .cpa-role { font-size: 11.5px; color: var(--text-muted); }
 .cpa-contact { font-size: 12px; color: var(--blue); margin-top: 3px; }
 
-/* ═══════════════════════════════════════
-   MOBILE RESPONSIVE
-═══════════════════════════════════════ */
+/* MOBILE */
 @media (max-width: 900px) {
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .dash-grid { grid-template-columns: 1fr; }
@@ -549,123 +246,75 @@ body {
   .chat-sidebar { display: none; }
   .chat-main { height: 500px; }
 }
-
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
-
-  .sidebar {
-    transform: translateX(-252px);
-    width: 252px;
-    z-index: 101;
-  }
+  .sidebar { transform: translateX(-252px); width: 252px; z-index: 101; }
   .sidebar.open { transform: translateX(0); }
   .sidebar-overlay.open { display: block; }
-
   .main { margin-left: 0; }
   .menu-btn { display: flex; align-items: center; justify-content: center; }
-
   .topbar { padding: 0 16px; }
   .date-badge { display: none; }
   .content { padding: 18px 16px; }
-
   .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .kpi { padding: 16px 16px; }
-  .kpi-value { font-size: 22px; }
-
-  .doc-grid { grid-template-columns: 1fr; }
-  .doc-grid .doc-card:last-child { display: none; }
-
-  .decl-table th, .decl-table td { padding: 10px 12px; font-size: 12px; }
-
-  .section-header { flex-wrap: wrap; }
-  .section-header h2 { font-size: 19px; }
-}
-
-@media (max-width: 480px) {
-  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi { padding: 16px; }
   .kpi-value { font-size: 20px; }
-  .kpi { padding: 14px; }
-
+  .doc-grid { grid-template-columns: 1fr; }
+  .decl-table th, .decl-table td { padding: 10px 12px; font-size: 12px; }
+}
+@media (max-width: 480px) {
   .login-box { padding: 36px 24px; }
-  .login-logo { font-size: 28px; }
-
-  .recent-table th:nth-child(3),
-  .recent-table td:nth-child(3) { display: none; }
+  .recent-table th:nth-child(3), .recent-table td:nth-child(3) { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║          LOGIN               ║ -->
-<!-- ╚══════════════════════════════╝ -->
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="login-logo">CONT<span>U</span>R</div>
+    <div class="login-logo">CON<span>TUR</span></div>
     <div class="login-sub">Portal de Clientes — Acceso seguro</div>
-    <div class="demo-badge">✦ Demo: cualquier usuario y contraseña</div>
+    <div class="demo-badge">✦ Demo: usa cualquier usuario y contraseña</div>
     <label class="form-label">Correo electrónico</label>
-    <input class="form-input" type="email" placeholder="tu@empresa.com" value="hotel@caribe.com">
+    <input class="form-input" type="email" id="login-email" placeholder="tu@empresa.com">
     <label class="form-label">Contraseña</label>
-    <input class="form-input" type="password" placeholder="••••••••" value="demo123">
+    <input class="form-input" type="password" id="login-pass" placeholder="••••••••" onkeypress="if(event.key==='Enter') doLogin()">
     <button class="btn-login" onclick="doLogin()">Ingresar al portal</button>
-    <div class="login-hint">¿Problemas para acceder? Contacta a tu CPA</div>
+    <div class="login-hint">¿Problemas para acceder? Contacta a tu CPA asignado</div>
+    <a href="index.html" class="back-link">← Volver al sitio principal</a>
   </div>
 </div>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║         PORTAL               ║ -->
-<!-- ╚══════════════════════════════╝ -->
+<!-- PORTAL -->
 <div id="portal-screen">
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-  <!-- SIDEBAR -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <div class="sidebar-logo-text">CONT<span>U</span>R</div>
+      <div class="sidebar-logo-text">CON<span>TUR</span></div>
       <div class="sidebar-client">Hotel Caribe S.R.L.</div>
     </div>
-
     <nav class="sidebar-nav">
       <div class="nav-section-title">Principal</div>
-      <div class="nav-item active" onclick="showPage('dashboard',this)">
-        <span class="nav-icon">⬡</span> Dashboard
-      </div>
-      <div class="nav-item" onclick="showPage('documentos',this)">
-        <span class="nav-icon">📂</span> Documentos
-        <span class="nav-badge">5</span>
-      </div>
-      <div class="nav-item" onclick="showPage('declaraciones',this)">
-        <span class="nav-icon">📋</span> Declaraciones
-        <span class="nav-badge">2</span>
-      </div>
-
+      <div class="nav-item active" onclick="showPage('dashboard',this)"><span class="nav-icon">⬡</span> Dashboard</div>
+      <div class="nav-item" onclick="showPage('documentos',this)"><span class="nav-icon">📂</span> Documentos<span class="nav-badge">5</span></div>
+      <div class="nav-item" onclick="showPage('declaraciones',this)"><span class="nav-icon">📋</span> Declaraciones<span class="nav-badge">2</span></div>
       <div class="nav-section-title">Comunicación</div>
-      <div class="nav-item" onclick="showPage('chat',this)">
-        <span class="nav-icon">💬</span> Chat con CPA
-      </div>
-
+      <div class="nav-item" onclick="showPage('chat',this)"><span class="nav-icon">💬</span> Chat con CPA</div>
       <div class="nav-section-title">Cuenta</div>
-      <div class="nav-item" onclick="showPage('perfil',this)">
-        <span class="nav-icon">🏢</span> Perfil de empresa
-      </div>
+      <div class="nav-item" onclick="showPage('perfil',this)"><span class="nav-icon">🏢</span> Perfil de empresa</div>
     </nav>
-
     <div class="sidebar-footer">
       <div class="sidebar-user">
         <div class="user-avatar">CM</div>
-        <div>
-          <div class="user-name">Carlos Mejía</div>
-          <div class="user-role">Gerente General</div>
-        </div>
+        <div><div class="user-name">Carlos Mejía</div><div class="user-role">Gerente General</div></div>
         <button class="btn-logout" onclick="doLogout()" title="Cerrar sesión">⏻</button>
       </div>
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
-    <!-- TOPBAR -->
     <div class="topbar">
       <div class="topbar-left">
         <button class="menu-btn" onclick="toggleSidebar()">☰</button>
@@ -677,45 +326,19 @@ body {
       </div>
     </div>
 
-    <!-- CONTENT -->
     <div class="content">
 
-      <!-- ── DASHBOARD ── -->
+      <!-- DASHBOARD -->
       <div class="page active" id="page-dashboard">
-        <!-- KPIs -->
         <div class="kpi-grid">
-          <div class="kpi gold">
-            <div class="kpi-label">Ingresos · Mar 2026</div>
-            <div class="kpi-value">DOP 685K</div>
-            <div class="kpi-sub">vs DOP 609K feb</div>
-            <div class="kpi-change up">▲ +12.4% vs mes anterior</div>
-          </div>
-          <div class="kpi blue">
-            <div class="kpi-label">Gastos · Mar 2026</div>
-            <div class="kpi-value">DOP 412K</div>
-            <div class="kpi-sub">vs DOP 398K feb</div>
-            <div class="kpi-change down">▼ +3.5% vs mes anterior</div>
-          </div>
-          <div class="kpi green">
-            <div class="kpi-label">Utilidad neta</div>
-            <div class="kpi-value">DOP 273K</div>
-            <div class="kpi-sub">Margen 39.9%</div>
-            <div class="kpi-change up">▲ Mejor trimestre</div>
-          </div>
-          <div class="kpi red">
-            <div class="kpi-label">Obligaciones fiscales</div>
-            <div class="kpi-value">DOP 83.8K</div>
-            <div class="kpi-sub">ITBIS + ISR pendientes</div>
-            <div class="kpi-change down">⚠ Vence 20 abr</div>
-          </div>
+          <div class="kpi gold"><div class="kpi-label">Ingresos · Mar 2026</div><div class="kpi-value">DOP 685K</div><div class="kpi-sub">vs DOP 609K feb</div><div class="kpi-change up">▲ +12.4% vs mes anterior</div></div>
+          <div class="kpi blue"><div class="kpi-label">Gastos · Mar 2026</div><div class="kpi-value">DOP 412K</div><div class="kpi-sub">vs DOP 398K feb</div><div class="kpi-change down">▼ +3.5% vs mes anterior</div></div>
+          <div class="kpi green"><div class="kpi-label">Utilidad neta</div><div class="kpi-value">DOP 273K</div><div class="kpi-sub">Margen 39.9%</div><div class="kpi-change up">▲ Mejor trimestre</div></div>
+          <div class="kpi red"><div class="kpi-label">Obligaciones fiscales</div><div class="kpi-value">DOP 83.8K</div><div class="kpi-sub">ITBIS + ISR pendientes</div><div class="kpi-change down">⚠ Vence 20 abr</div></div>
         </div>
-
-        <!-- Charts + Alerts -->
         <div class="dash-grid">
           <div class="card-box">
-            <div class="card-header">
-              <div class="card-title-sm">Ingresos vs Gastos — 2026</div>
-            </div>
+            <div class="card-header"><div class="card-title-sm">Ingresos vs Gastos — 2026</div></div>
             <div class="card-body">
               <div class="chart-bars">
                 <div class="bar-group"><div class="bar income" style="height:72px"></div><div class="bar expense" style="height:56px"></div></div>
@@ -725,50 +348,23 @@ body {
                 <div class="bar-group"><div class="bar income" style="height:88px"></div><div class="bar expense" style="height:66px"></div></div>
                 <div class="bar-group"><div class="bar income" style="height:108px"></div><div class="bar expense" style="height:70px"></div></div>
               </div>
-              <div class="chart-labels">
-                <div class="chart-label">Oct</div>
-                <div class="chart-label">Nov</div>
-                <div class="chart-label">Dic</div>
-                <div class="chart-label">Ene</div>
-                <div class="chart-label">Feb</div>
-                <div class="chart-label">Mar</div>
-              </div>
-              <div class="chart-legend">
-                <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Ingresos</div>
-                <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div> Gastos</div>
-              </div>
+              <div class="chart-labels"><div class="chart-label">Oct</div><div class="chart-label">Nov</div><div class="chart-label">Dic</div><div class="chart-label">Ene</div><div class="chart-label">Feb</div><div class="chart-label">Mar</div></div>
+              <div class="chart-legend"><div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Ingresos</div><div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div> Gastos</div></div>
             </div>
           </div>
-
           <div class="card-box">
-            <div class="card-header">
-              <div class="card-title-sm">Alertas activas</div>
-            </div>
+            <div class="card-header"><div class="card-title-sm">Alertas activas</div></div>
             <div class="card-body">
               <div class="alert-list">
-                <div class="alert-item danger">
-                  <div class="alert-dot"></div>
-                  <div><div class="alert-title">ITBIS marzo vence pronto</div><div class="alert-desc">Fecha límite: 20 abril 2026. DOP 42,800 por pagar.</div></div>
-                </div>
-                <div class="alert-item warning">
-                  <div class="alert-dot"></div>
-                  <div><div class="alert-title">Retención ISR pendiente</div><div class="alert-desc">DOP 12,600 — vence 10 abril 2026.</div></div>
-                </div>
-                <div class="alert-item info">
-                  <div class="alert-dot"></div>
-                  <div><div class="alert-title">IR-2 2025 en preparación</div><div class="alert-desc">Tu CPA está completando la declaración anual.</div></div>
-                </div>
+                <div class="alert-item danger"><div class="alert-dot"></div><div><div class="alert-title">ITBIS marzo vence pronto</div><div class="alert-desc">Fecha límite: 20 abril 2026. DOP 42,800 por pagar.</div></div></div>
+                <div class="alert-item warning"><div class="alert-dot"></div><div><div class="alert-title">Retención ISR pendiente</div><div class="alert-desc">DOP 12,600 — vence 10 abril 2026.</div></div></div>
+                <div class="alert-item info"><div class="alert-dot"></div><div><div class="alert-title">IR-2 2025 en preparación</div><div class="alert-desc">Tu CPA está completando la declaración anual.</div></div></div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Recientes -->
         <div class="card-box">
-          <div class="card-header">
-            <div class="card-title-sm">Transacciones recientes</div>
-            <button class="btn-primary" onclick="showPage('documentos', document.querySelectorAll('.nav-item')[1])">Ver documentos</button>
-          </div>
+          <div class="card-header"><div class="card-title-sm">Transacciones recientes</div><button class="btn-primary" onclick="showPage('documentos', document.querySelectorAll('.nav-item')[1])">Ver documentos</button></div>
           <div class="card-body" style="padding:0 22px;">
             <div class="table-scroll">
               <table class="recent-table">
@@ -787,12 +383,9 @@ body {
         </div>
       </div>
 
-      <!-- ── DOCUMENTOS ── -->
+      <!-- DOCUMENTOS -->
       <div class="page" id="page-documentos">
-        <div class="section-header">
-          <h2>Documentos y Reportes</h2>
-          <button class="btn-primary" onclick="alert('Solicitud enviada a tu CPA.')">＋ Solicitar documento</button>
-        </div>
+        <div class="section-header"><h2>Documentos y Reportes</h2><button class="btn-primary" onclick="alert('Solicitud enviada a tu CPA.')">＋ Solicitar documento</button></div>
         <div class="doc-filters">
           <button class="filter-btn active" onclick="filterDocs('todos',this)">Todos</button>
           <button class="filter-btn" onclick="filterDocs('financiero',this)">Estados Financieros</button>
@@ -800,65 +393,18 @@ body {
           <button class="filter-btn" onclick="filterDocs('nomina',this)">Nómina</button>
         </div>
         <div class="doc-grid" id="doc-grid">
-          <div class="doc-card" data-cat="financiero">
-            <div class="doc-icon">📄</div>
-            <div class="doc-name">Estado de Resultados — Mar 2026</div>
-            <div class="doc-meta">PDF · 2.1 MB · Subido: 01 Abr 2026</div>
-            <div class="doc-actions">
-              <button class="btn-sm primary" onclick="alert('Descargando: Estado de Resultados Mar 2026.pdf')">⬇ Descargar</button>
-              <button class="btn-sm secondary">👁 Ver</button>
-            </div>
-          </div>
-          <div class="doc-card" data-cat="financiero">
-            <div class="doc-icon">📄</div>
-            <div class="doc-name">Balance General — Mar 2026</div>
-            <div class="doc-meta">PDF · 1.8 MB · Subido: 01 Abr 2026</div>
-            <div class="doc-actions">
-              <button class="btn-sm primary" onclick="alert('Descargando: Balance General Mar 2026.pdf')">⬇ Descargar</button>
-              <button class="btn-sm secondary">👁 Ver</button>
-            </div>
-          </div>
-          <div class="doc-card" data-cat="financiero">
-            <div class="doc-icon">📋</div>
-            <div class="doc-name">Flujo de Caja — Mar 2026</div>
-            <div class="doc-meta">PDF · 0.9 MB · Subido: 01 Abr 2026</div>
-            <div class="doc-actions">
-              <button class="btn-sm primary" onclick="alert('Descargando: Flujo de Caja Mar 2026.pdf')">⬇ Descargar</button>
-              <button class="btn-sm secondary">👁 Ver</button>
-            </div>
-          </div>
-          <div class="doc-card" data-cat="declaracion">
-            <div class="doc-icon">🏛</div>
-            <div class="doc-name">Declaración IT-1 — Mar 2026</div>
-            <div class="doc-meta">PDF · 1.2 MB · Enviada: 18 Mar 2026</div>
-            <div class="doc-actions">
-              <button class="btn-sm primary" onclick="alert('Descargando: IT-1 Mar 2026.pdf')">⬇ Descargar</button>
-              <button class="btn-sm secondary">👁 Ver</button>
-            </div>
-          </div>
-          <div class="doc-card" data-cat="nomina">
-            <div class="doc-icon">💼</div>
-            <div class="doc-name">Nómina y TSS — Mar 2026</div>
-            <div class="doc-meta">PDF · 0.7 MB · Subido: 05 Mar 2026</div>
-            <div class="doc-actions">
-              <button class="btn-sm primary" onclick="alert('Descargando: Nómina Mar 2026.pdf')">⬇ Descargar</button>
-              <button class="btn-sm secondary">👁 Ver</button>
-            </div>
-          </div>
-          <div class="doc-card" data-cat="todos" style="border:2px dashed var(--border);background:var(--surface);align-items:center;justify-content:center;text-align:center;cursor:pointer;" onclick="alert('Solicitud enviada a tu CPA.')">
-            <div class="doc-icon" style="color:var(--text-muted);">＋</div>
-            <div class="doc-name" style="color:var(--text-secondary);">Solicitar nuevo documento</div>
-            <div class="doc-meta">Tu CPA lo prepara en 24–48 hrs</div>
-          </div>
+          <div class="doc-card" data-cat="financiero"><div class="doc-icon">📄</div><div class="doc-name">Estado de Resultados — Mar 2026</div><div class="doc-meta">PDF · 2.1 MB · Subido: 01 Abr 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando...')">⬇ Descargar</button><button class="btn-sm secondary">👁 Ver</button></div></div>
+          <div class="doc-card" data-cat="financiero"><div class="doc-icon">📄</div><div class="doc-name">Balance General — Mar 2026</div><div class="doc-meta">PDF · 1.8 MB · Subido: 01 Abr 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando...')">⬇ Descargar</button><button class="btn-sm secondary">👁 Ver</button></div></div>
+          <div class="doc-card" data-cat="financiero"><div class="doc-icon">📋</div><div class="doc-name">Flujo de Caja — Mar 2026</div><div class="doc-meta">PDF · 0.9 MB · Subido: 01 Abr 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando...')">⬇ Descargar</button><button class="btn-sm secondary">👁 Ver</button></div></div>
+          <div class="doc-card" data-cat="declaracion"><div class="doc-icon">🏛</div><div class="doc-name">Declaración IT-1 — Mar 2026</div><div class="doc-meta">PDF · 1.2 MB · Enviada: 18 Mar 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando...')">⬇ Descargar</button><button class="btn-sm secondary">👁 Ver</button></div></div>
+          <div class="doc-card" data-cat="nomina"><div class="doc-icon">💼</div><div class="doc-name">Nómina y TSS — Mar 2026</div><div class="doc-meta">PDF · 0.7 MB · Subido: 05 Mar 2026</div><div class="doc-actions"><button class="btn-sm primary" onclick="alert('Descargando...')">⬇ Descargar</button><button class="btn-sm secondary">👁 Ver</button></div></div>
+          <div class="doc-card" data-cat="todos" style="border:2px dashed var(--border);background:var(--surface);align-items:center;justify-content:center;text-align:center;cursor:pointer;" onclick="alert('Solicitud enviada a tu CPA.')"><div class="doc-icon" style="color:var(--text-muted);">＋</div><div class="doc-name" style="color:var(--text-secondary);">Solicitar nuevo documento</div><div class="doc-meta">Tu CPA lo prepara en 24–48 hrs</div></div>
         </div>
       </div>
 
-      <!-- ── DECLARACIONES ── -->
+      <!-- DECLARACIONES -->
       <div class="page" id="page-declaraciones">
-        <div class="section-header">
-          <h2>Estado de Declaraciones Fiscales</h2>
-          <button class="btn-primary" onclick="alert('Tu CPA está siendo notificado.')">💬 Consultar con CPA</button>
-        </div>
+        <div class="section-header"><h2>Estado de Declaraciones Fiscales</h2><button class="btn-primary" onclick="alert('Tu CPA está siendo notificado.')">💬 Consultar con CPA</button></div>
         <div class="table-scroll">
           <table class="decl-table">
             <thead><tr><th>Tipo</th><th>Período</th><th>Monto</th><th>Fecha límite</th><th>Fecha envío</th><th>Estado</th></tr></thead>
@@ -876,25 +422,15 @@ body {
         </div>
       </div>
 
-      <!-- ── CHAT ── -->
+      <!-- CHAT -->
       <div class="page" id="page-chat">
         <div class="section-header"><h2>Chat con tu CPA</h2></div>
         <div class="chat-layout">
           <div class="chat-sidebar">
             <div class="chat-sidebar-header">Tu equipo Contur</div>
-            <div class="chat-contact active">
-              <div class="contact-avatar" style="background:var(--blue);">MR</div>
-              <div><div class="contact-name">María Rodríguez</div><div class="contact-role">CPA Principal</div></div>
-              <div class="online-dot"></div>
-            </div>
-            <div class="chat-contact">
-              <div class="contact-avatar" style="background:var(--gold);color:var(--navy);">JG</div>
-              <div><div class="contact-name">Juan García</div><div class="contact-role">Especialista Fiscal</div></div>
-            </div>
-            <div class="chat-contact">
-              <div class="contact-avatar" style="background:#4b5563;">SC</div>
-              <div><div class="contact-name">Soporte Contur</div><div class="contact-role">Atención al cliente</div></div>
-            </div>
+            <div class="chat-contact active"><div class="contact-avatar" style="background:var(--blue);">MR</div><div><div class="contact-name">María Rodríguez</div><div class="contact-role">CPA Principal</div></div><div class="online-dot"></div></div>
+            <div class="chat-contact"><div class="contact-avatar" style="background:var(--gold);color:var(--navy);">JG</div><div><div class="contact-name">Juan García</div><div class="contact-role">Especialista Fiscal</div></div></div>
+            <div class="chat-contact"><div class="contact-avatar" style="background:#4b5563;">SC</div><div><div class="contact-name">Soporte Contur</div><div class="contact-role">Atención al cliente</div></div></div>
           </div>
           <div class="chat-main">
             <div class="chat-header">
@@ -905,8 +441,7 @@ body {
               <div class="msg recv"><div class="msg-bubble">¡Buenos días! Ya subí el Estado de Resultados de marzo. Todo se ve muy bien este mes, los ingresos crecieron un 12.4%.</div><div class="msg-time">9:14 AM</div></div>
               <div class="msg sent"><div class="msg-bubble">¡Excelente! ¿Y el ITBIS de marzo, cuándo lo enviamos?</div><div class="msg-time">9:22 AM</div></div>
               <div class="msg recv"><div class="msg-bubble">El vencimiento es el 20 de abril. Ya lo tengo casi listo — esta semana te lo comparto para revisión antes de enviarlo a la DGII.</div><div class="msg-time">9:24 AM</div></div>
-              <div class="msg recv"><div class="msg-bubble">También necesito que me confirmes los ingresos de la segunda quincena de marzo. Tengo los datos pero quiero asegurarme de que estén completos.</div><div class="msg-time">9:25 AM</div></div>
-              <div class="msg sent"><div class="msg-bubble">Claro, te envío los registros hoy en la tarde. ¡Gracias María!</div><div class="msg-time">9:30 AM</div></div>
+              <div class="msg sent"><div class="msg-bubble">Perfecto. ¡Gracias María!</div><div class="msg-time">9:30 AM</div></div>
             </div>
             <div class="chat-input-area">
               <input type="text" class="chat-input" id="chat-input" placeholder="Escribe un mensaje…" onkeypress="if(event.key==='Enter') sendMsg()">
@@ -916,17 +451,14 @@ body {
         </div>
       </div>
 
-      <!-- ── PERFIL ── -->
+      <!-- PERFIL -->
       <div class="page" id="page-perfil">
-        <div class="section-header">
-          <h2>Perfil de Empresa</h2>
-          <button class="btn-primary" onclick="alert('Cambios guardados correctamente.')">Guardar cambios</button>
-        </div>
+        <div class="section-header"><h2>Perfil de Empresa</h2><button class="btn-primary" onclick="alert('Cambios guardados.')">Guardar cambios</button></div>
         <div class="perfil-grid">
           <div>
             <div class="perfil-card" style="margin-bottom:18px;">
               <div class="perfil-card-title">Información de la empresa</div>
-              <div class="perfil-field"><div class="perfil-label">Nombre de la empresa</div><input class="perfil-input" value="Hotel Caribe S.R.L."></div>
+              <div class="perfil-field"><div class="perfil-label">Nombre</div><input class="perfil-input" value="Hotel Caribe S.R.L."></div>
               <div class="perfil-field"><div class="perfil-label">RNC</div><input class="perfil-input" value="1-31-00001-2"></div>
               <div class="perfil-field"><div class="perfil-label">Tipo de empresa</div><input class="perfil-input" value="Hotel / Alojamiento turístico"></div>
               <div class="perfil-field"><div class="perfil-label">Dirección</div><input class="perfil-input" value="Haras Nacionales, Santo Domingo, R.D."></div>
@@ -957,42 +489,39 @@ body {
               <div class="perfil-card-title">Tu CPA asignado</div>
               <div class="cpa-card">
                 <div class="cpa-avatar">MR</div>
-                <div>
-                  <div class="cpa-name">María Rodríguez, CPA</div>
-                  <div class="cpa-role">Contadora Principal — Contur</div>
-                  <div class="cpa-contact">📞 809-000-0001 · maria@contur.com.do</div>
-                </div>
+                <div><div class="cpa-name">María Rodríguez, CPA</div><div class="cpa-role">Contadora Principal — Contur</div><div class="cpa-contact">📞 809-000-0001 · maria@contur.com.do</div></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /portal-screen -->
+    </div>
+  </div>
+</div>
 
 <script>
-/* ── FECHA ── */
 (function() {
   const d = new Date();
   const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
   const str = d.toLocaleDateString('es-DO', opts);
-  document.getElementById('date-display').textContent = str.charAt(0).toUpperCase() + str.slice(1);
+  const el = document.getElementById('date-display');
+  if (el) el.textContent = str.charAt(0).toUpperCase() + str.slice(1);
 })();
 
-/* ── AUTH ── */
 function doLogin() {
+  const email = document.getElementById('login-email').value;
+  const pass  = document.getElementById('login-pass').value;
+  if (!email || !pass) { alert('Por favor ingresa tu correo y contraseña.'); return; }
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('portal-screen').classList.add('active');
 }
 function doLogout() {
   document.getElementById('portal-screen').classList.remove('active');
   document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-pass').value = '';
   closeSidebar();
 }
-
-/* ── SIDEBAR MOBILE ── */
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('sidebar-overlay').classList.toggle('open');
@@ -1001,42 +530,23 @@ function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebar-overlay').classList.remove('open');
 }
-
-/* ── NAVIGATION ── */
 function showPage(name, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (el) el.classList.add('active');
-  const titles = {
-    dashboard: 'Dashboard',
-    documentos: 'Documentos y Reportes',
-    declaraciones: 'Declaraciones Fiscales',
-    chat: 'Chat con tu CPA',
-    perfil: 'Perfil de Empresa'
-  };
+  const titles = { dashboard:'Dashboard', documentos:'Documentos y Reportes', declaraciones:'Declaraciones Fiscales', chat:'Chat con tu CPA', perfil:'Perfil de Empresa' };
   document.getElementById('topbar-title').textContent = titles[name] || name;
   closeSidebar();
 }
-
-/* ── DOC FILTERS ── */
 function filterDocs(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('#doc-grid .doc-card').forEach(card => {
-    const cardCat = card.dataset.cat;
-    card.style.display = (cat === 'todos' || cardCat === cat || cardCat === 'todos') ? '' : 'none';
+    card.style.display = (cat === 'todos' || card.dataset.cat === cat || card.dataset.cat === 'todos') ? '' : 'none';
   });
 }
-
-/* ── CHAT ── */
-const replies = [
-  'Recibido, te respondo en breve.',
-  'Perfecto, lo reviso ahora mismo.',
-  'Anotado. Te confirmo en unos minutos.',
-  'Entendido, ya estoy en eso.',
-  'Gracias por la info, la proceso hoy.'
-];
+const replies = ['Recibido, te respondo en breve.','Perfecto, lo reviso ahora mismo.','Anotado. Te confirmo en unos minutos.','Entendido, ya estoy en eso.','Gracias por la info, la proceso hoy.'];
 function sendMsg() {
   const input = document.getElementById('chat-input');
   const text = input.value.trim();
@@ -1053,8 +563,7 @@ function sendMsg() {
   setTimeout(() => {
     const resp = document.createElement('div');
     resp.className = 'msg recv';
-    const r = replies[Math.floor(Math.random() * replies.length)];
-    resp.innerHTML = '<div class="msg-bubble">' + r + '</div><div class="msg-time">' + time + '</div>';
+    resp.innerHTML = '<div class="msg-bubble">' + replies[Math.floor(Math.random()*replies.length)] + '</div><div class="msg-time">' + time + '</div>';
     msgs.appendChild(resp);
     msgs.scrollTop = msgs.scrollHeight;
   }, 1100);
