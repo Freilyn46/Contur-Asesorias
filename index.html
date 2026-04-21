@@ -234,15 +234,6 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
 .footer-links a { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; }
 .footer-links a:hover { color: #c9a84c; }
 
-/* ── MODAL ── */
-.modal-bg { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.75); align-items: center; justify-content: center; }
-.modal-bg.open { display: flex; }
-.modal { background: #fff; border-radius: 14px; padding: 44px; width: 420px; max-width: 95vw; position: relative; }
-.modal-close { position: absolute; top: 16px; right: 16px; background: #f3f4f6; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; }
-.modal-logo { text-align: center; font-size: 26px; font-weight: bold; color: #0d1b2a; letter-spacing: 2px; margin-bottom: 6px; }
-.modal-logo span { color: #c9a84c; }
-.modal-sub { text-align: center; font-family: Arial, sans-serif; font-size: 13px; color: #6b7280; margin-bottom: 24px; }
-.modal-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 10px 14px; font-family: Arial, sans-serif; font-size: 12px; color: #1a5276; text-align: center; margin-bottom: 20px; }
 
 /* ════════════════════════════════════════
    MOBILE RESPONSIVE — FIXES COMPLETOS
@@ -341,7 +332,7 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
     <li><a href="#planes">Planes</a></li>
     <li><a href="#portal">Portal</a></li>
     <li><a href="#contacto">Contacto</a></li>
-    <li><a href="#" class="nav-btn" onclick="abrirPortal();return false;">Acceder al Portal</a></li>
+    <li><a href="contur-portal.html" class="nav-btn">Acceder al Portal</a></li>
   </ul>
 
   <!-- Hamburger (mobile) -->
@@ -358,7 +349,7 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
   <a href="#planes" onclick="closeMenu()">Planes</a>
   <a href="#portal" onclick="closeMenu()">Portal</a>
   <a href="#contacto" onclick="closeMenu()">Contacto</a>
-  <a href="#" class="m-nav-btn" onclick="closeMenu();abrirPortal();return false;">Acceder al Portal</a>
+  <a href="contur-portal.html" class="m-nav-btn" onclick="closeMenu()">Acceder al Portal</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -593,7 +584,7 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
           <div class="pf"><div class="pf-icon">💬</div><div><div class="pf-title">Chat directo con tu CPA</div><p class="pf-desc">Comunicacion directa con el contador asignado a tu empresa, sin intermediarios.</p></div></div>
         </div>
         <br>
-        <a href="#" class="btn-gold" onclick="abrirPortal();return false;">Acceder al portal</a>
+        <a href="contur-portal.html" class="btn-gold">Acceder al portal</a>
       </div>
     </div>
   </div>
@@ -663,11 +654,6 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
   </div>
 </footer>
 
-<!-- ── MODAL PORTAL ── -->
-<div class="modal-bg" id="modalPortal">
-  <div class="modal">
-    <button class="modal-close" onclick="cerrarPortal()">✕</button>
-    <div class="modal-logo">CON<span>TUR</span></div>
     <p class="modal-sub">Portal de Clientes</p>
     <div class="modal-note">Acceso exclusivo para clientes Contur</div>
     <div class="form-group"><label class="form-label">Correo electronico</label><input type="email" class="form-input" placeholder="empresa@correo.com"></div>
@@ -680,15 +666,6 @@ footer { background: #0d1b2a; padding: 50px 40px; border-top: 2px solid rgba(201
 </div>
 
 <script>
-function abrirPortal() {
-  document.getElementById('modalPortal').classList.add('open');
-}
-function cerrarPortal() {
-  document.getElementById('modalPortal').classList.remove('open');
-}
-document.getElementById('modalPortal').addEventListener('click', function(e) {
-  if (e.target === this) cerrarPortal();
-});
 
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
